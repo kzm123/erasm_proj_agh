@@ -11,7 +11,7 @@ body {
 }
 
 h1 {
-  font-size: 22px;
+  font-size: 24px;
   color: #0018a8;
   font-weight: normal;
   border-bottom: 1px solid #0018a8;
@@ -34,13 +34,9 @@ a:hover {
 }
 
 div#wrapper {
-  width: 800px;
-  margin: 20px auto;
-  text-align: left;
-}
-
-div#login {
-  text-align: center;
+	width: 800px;
+	margin: 20px auto;
+	text-align: left;
 }
 
 img#logo {
@@ -94,12 +90,42 @@ img#logo {
   border: 1px solid #017834;
 }
 
+div#buttons {
+	margin-bottom: -27px;
+	text-align: right;
+}
+
 .userform input:focus, .userform select:focus, .userform textarea:focus {
   border: 1px solid #017834;
 }
 
 .userform p .errors {
     border: 1px solid #e40b37;
+}
+
+a.button {
+	display: inline;
+	margin-left: -2px;
+	padding: 1px 8px;
+	text-align: center;
+	background: #0018a8;
+	border: 1px solid #0018a8;
+	color: #fff;
+}
+
+a.button:hover {
+	background: #017834;
+	color: #fff;
+	border: 1px solid #017834;
+}
+
+ul.profileinfo {
+	padding-top: 10px;
+	list-style-type: none;
+}
+
+ul.profileinfo li {
+	line-height: 24px;
 }
 
 .message {
