@@ -23,7 +23,17 @@
 			</h1>
 			
 			<ul class="profileinfo">
+			
+				<g:if test="${session?.user?.profilePhoto}">
+					<img src="${resource(dir:'images', file:session.user.profilePhoto)}" />
+				</g:if>
 				
+				<!-- 
+				<g:if test="${session?.user?.details?.gender}">
+					<li>Gender: ${session?.user?.details?.gender}</li>
+				</g:if>
+			 	-->
+			 	
 				<g:if test="${session?.user?.details?.email}">
 					<li>e-mail: ${session?.user?.details?.email}</li>
 				</g:if>
@@ -38,6 +48,11 @@
 				
 				<g:if test="${session?.user?.details?.country}">
 					<li>Country: ${session?.user?.details?.country}</li>
+				</g:if>
+			
+				<g:if test="${session?.user?.details?.dateOfBirth}">
+					<li>Date of Birth: <g:formatDate date="${session?.user?.details?.dateOfBirth}" type="date" style="LONG"/></li>
+					
 				</g:if>
 				
 				<g:if test="${session?.user?.details?.university}">

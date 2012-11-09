@@ -19,7 +19,7 @@ class UserDetails {
     static constraints = {
         name blank: false, nullable: false, size: 2..45
         surname blank: false, nullable: false, size: 2..45
-        gender blank: true, nullable: true
+        gender blank: false, nullable: false
         email blank: true, nullable: true
         city blank: true, nullable: true
 		address blank: true, nullable: true

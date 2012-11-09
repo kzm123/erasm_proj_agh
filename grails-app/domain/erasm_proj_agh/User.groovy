@@ -14,6 +14,8 @@ class User {
     String password
     String confirm
 	
+	String profilePhoto
+	
 	UserDetails details
 
     static transients = ['password', 'confirm']
@@ -23,6 +25,7 @@ class User {
         password  blank: false, size: 5..30, matches: /[\S]+/, validator: { val, obj -> 
                 if (obj.properties['confirm'] != val) return 'user.password.dontmatch'
             }
+		profilePhoto blank: true, nullable: true
     }
     
 }

@@ -24,22 +24,27 @@
         <p>
             <label for="password">Password</label>
             <g:passwordField name="password"
-                class="${hasErrors(bean: user, field: 'username', 'errors')}"/>
+                class="${hasErrors(bean: user, field: 'password', 'errors')}"/>
         </p>
         <p>
             <label for="confirm">Confirm Password</label>
             <g:passwordField name="confirm"
-                class="${hasErrors(bean: user, field: 'username', 'errors')}"/>
+                class="${hasErrors(bean: user, field: 'confirm', 'errors')}"/>
         </p>
         <p>
-            <label for="firstName">First Name</label>
+            <label for="name">First Name</label>
             <g:textField name="name" value="${user?.details?.name}"
-                class="${hasErrors(bean: user, field: 'username', 'errors')}"/>
+                class="${hasErrors(bean: userDetails, field: 'name', 'errors')}"/>
         </p>
         <p>
-            <label for="lastName">Last Name</label>
+            <label for="surname">Last Name</label>
             <g:textField name="surname" value="${user?.details?.surname}"
-                class="${hasErrors(bean: user, field: 'username', 'errors')}"/>
+                class="${hasErrors(bean: userDetails, field: 'surname', 'errors')}"/>
+        </p>
+        <p>
+        	<label for="gender">Gender</label>
+        	<g:checkBox name="gender" value="${user?.details?.gender}" 
+        		class="${hasErrors(bean: userDetails, field: 'gender', 'errors')}"/>
         </p>
         <p class="button">
             <label>&nbsp;</label>

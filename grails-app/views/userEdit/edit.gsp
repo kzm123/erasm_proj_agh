@@ -37,6 +37,12 @@
 	        </p>
 	        
 	        <p>
+	        	<label for="gender">Gender</label>
+	        	<g:checkBox name="gender" value="${user?.details?.gender}" 
+	        		class="${hasErrors(bean: userDetails, field: 'gender', 'errors')}"/>
+	        </p>
+	        
+	        <p>
 	            <label for="email">e-mail</label>
 	            <g:textField name="email" value="${session?.user?.details?.email}"
 	                class="${hasErrors(bean: user, field: 'email', 'errors')}"/>
@@ -58,6 +64,13 @@
 	            <label for="country">Country</label>
 	            <g:textField name="country" value="${session?.user?.details?.country}"
 	                class="${hasErrors(bean: user, field: 'country', 'errors')}"/>
+	        </p>
+	        
+	        <p>
+	        	<label for="dateOfBirth">Date of Birth</label>
+	        	<g:datePicker name="dateOfBirth" value="${user?.details?.dateOfBirth}"
+	        		precision="day" noSelection="['':'Choose']" relativeYears="[-100..-10]"
+	        		class="${hasErrors(bean: userDetails, field: 'dateOfBirth', 'errors')}"/>
 	        </p>
 	        
 	        <p>
@@ -84,6 +97,17 @@
 	        </p>
 	        
 	    </g:form>
+	        
+	        <p>
+	        	<fieldset>
+					<legend>Photo Upload</legend>
+					<g:form action="uploadProfilePhoto" method="post" enctype="multipart/form-data">
+						<label for="profilePhoto">Photo</label>
+						<input type="file" name="profilePhoto" id="profilePhoto" />
+						<input type="submit" class="buttons" value="Upload" />
+					</g:form>
+				</fieldset>
+	        </p>
     
     </g:if>
     
