@@ -25,6 +25,18 @@
 	        </g:hasErrors>
 	        
 	        <p>
+	            <label for="password">Password</label>
+	            <g:passwordField name="password"
+	                class="${hasErrors(bean: user, field: 'password', 'errors')}"/>
+	        </p>
+	        
+	        <p>
+	            <label for="confirm">Confirm Password</label>
+	            <g:passwordField name="confirm"
+	                class="${hasErrors(bean: user, field: 'confirm', 'errors')}"/>
+	        </p>
+	        
+	        <p>
 	            <label for="firstName">First Name</label>
 	            <g:textField name="name" value="${session?.user?.details?.name}"
 	                class="${hasErrors(bean: user, field: 'name', 'errors')}"/>
@@ -98,15 +110,14 @@
 	        
 	    </g:form>
 	        
-	        <p>
-	        	<fieldset>
-					<legend>Photo Upload</legend>
-					<g:form action="uploadProfilePhoto" method="post" enctype="multipart/form-data">
-						<label for="profilePhoto">Photo</label>
-						<input type="file" name="profilePhoto" id="profilePhoto" />
-						<input type="submit" class="buttons" value="Upload" />
-					</g:form>
-				</fieldset>
+	        <br />
+	        
+	        <p style="text-align:center;display:block;">
+				<g:form action="uploadProfilePhoto" method="post" enctype="multipart/form-data">
+					<label for="profilePhoto">Profile photo</label>
+					<input type="file" name="profilePhoto" id="profilePhoto" />
+					<input type="submit" class="buttons" value="Upload" />
+				</g:form>
 	        </p>
     
     </g:if>
