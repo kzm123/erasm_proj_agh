@@ -4,11 +4,22 @@ class UserEditController {
 
     def edit() {
 		if ((request.method == 'POST') && session.user) {
-			for (param in params) {
-				session.user.details.properties[param.key] = param.value
+			if (params['password'] != params['confirm']) {
+				return [user:user]
+			} else {
+				for (param in params) {
+					session.user.details.properties[param.key] = param.value
+				}
+				session.user.details.save()
+				
+				if (params['password'] != "") {
+					def domainUser = User.get(session.user.id)
+					domainUser.passwordHashed = params.password.encodeAsPassword()
+					domainUser.save()
+				}
+				
+	            redirect(controller:'main')
 			}
-			session.user.details.save()
-            redirect(controller:'main')
 	    } else if (!session.user) {
 			// user not logged in, redirect to main page
             redirect(controller:'main')
@@ -17,6 +28,7 @@ class UserEditController {
 	
 	def uploadProfilePhoto() {
 		def user = session.user
+		def domainUser = User.get(session.user.id)
 		
 		def file = request.getFile('profilePhoto')
 		
@@ -42,6 +54,8 @@ class UserEditController {
 		}
 		
 		session.user.profilePhoto = user.username + "." + extension
+		domainUser.profilePhoto = user.username + "." + extension
+		domainUser.save()
 		
 		if (!file.isEmpty()) {
 			file.transferTo(new File("web-app/images/" + user.username + "." + extension))
