@@ -11,21 +11,26 @@ class User {
     String username
     String passwordHashed
 	
-    String password
-    String confirm
-	
+	UserDetails details
+	    
 	String profilePhoto
 	
-	UserDetails details
-
-    static transients = ['password', 'confirm']
+	String password
+	String confirm
 
     static constraints = {
-        username blank: false, nullable: false, size: 5..20, matches: /[\S]+/, unique: true
-        password  blank: false, size: 5..30, matches: /[\S]+/, validator: { val, obj -> 
-                if (obj.properties['confirm'] != val) return 'user.password.dontmatch'
-            }
+        username blank: false, nullable: false, size: 5..30, matches: /[a-zA-Z0-9_-]+/, unique: true
+		password blank: true, nullable: true
 		profilePhoto blank: true, nullable: true
+		details blank: false, nullable: false
+		password bindable: true, blank: false, nullable: true, size: 5..30, validator: { val, obj ->
+			if (obj.confirm != null) {
+				val == obj.confirm ? true : 'user.password.validator'
+			}
+		}
+        confirm bindable: true, blank: false, nullable: true
     }
+	
+	static transients = ['password', 'confirm']
     
 }

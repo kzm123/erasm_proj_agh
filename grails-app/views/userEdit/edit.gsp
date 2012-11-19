@@ -19,51 +19,70 @@
 	    <g:form class="userform" url="[controller: 'UserEdit', action: 'edit']">
 	        
 	        <g:hasErrors bean="${user}">
-	            <div class="errors">
-	                <g:renderErrors bean="${user}"/>
-	            </div>
-	        </g:hasErrors>
+				<div class="errors">
+				    <g:renderErrors bean="${user}"/>
+				</div>
+			</g:hasErrors>
+	        
+			<g:hasErrors bean="${userDetails}">
+				<div class="errors">
+				    <g:renderErrors bean="${userDetails}"/>
+				</div>
+			</g:hasErrors>
+	        
+	        <p>
+	            <label for="password">Password</label>
+	            <g:passwordField name="password"
+	                class="${hasErrors(bean: user, field: 'password', 'errors')}"/>
+	        </p>
+	        
+	        <p>
+	            <label for="confirm">Confirm Password</label>
+	            <g:passwordField name="confirm"
+	                class="${hasErrors(bean: user, field: 'confirm', 'errors')}"/>
+	        </p>
 	        
 	        <p>
 	            <label for="firstName">First Name</label>
 	            <g:textField name="name" value="${session?.user?.details?.name}"
-	                class="${hasErrors(bean: user, field: 'name', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'name', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="lastName">Last Name</label>
 	            <g:textField name="surname" value="${session?.user?.details?.surname}"
-	                class="${hasErrors(bean: user, field: 'surname', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'surname', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	        	<label for="gender">Gender</label>
-	        	<g:checkBox name="gender" value="${user?.details?.gender}" 
-	        		class="${hasErrors(bean: userDetails, field: 'gender', 'errors')}"/>
+				<g:radioGroup name="gender" labels="['Man','Woman']" values="['true','false']" value="${user?.details?.gender}" class="${hasErrors(bean: userDetails, field: 'gender', 'errors')}">
+					<span>${it.radio} ${it.label}</span>
+				</g:radioGroup>
 	        </p>
 	        
 	        <p>
 	            <label for="email">e-mail</label>
 	            <g:textField name="email" value="${session?.user?.details?.email}"
-	                class="${hasErrors(bean: user, field: 'email', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'email', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="city">City</label>
 	            <g:textField name="city" value="${session?.user?.details?.city}"
-	                class="${hasErrors(bean: user, field: 'city', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'city', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="address">Address</label>
 	            <g:textField name="address" value="${session?.user?.details?.address}"
-	                class="${hasErrors(bean: user, field: 'address', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'address', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="country">Country</label>
 	            <g:textField name="country" value="${session?.user?.details?.country}"
-	                class="${hasErrors(bean: user, field: 'country', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'country', 'errors')}"/>
 	        </p>
 	        
 	        <p>
@@ -76,19 +95,19 @@
 	        <p>
 	            <label for="university">University</label>
 	            <g:textField name="university" value="${session?.user?.details?.university}"
-	                class="${hasErrors(bean: user, field: 'university', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'university', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="highSchool">High School</label>
 	            <g:textField name="highSchool" value="${session?.user?.details?.highSchool}"
-	                class="${hasErrors(bean: user, field: 'highSchool', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'highSchool', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="workPlace">Work Place</label>
 	            <g:textField name="workPlace" value="${session?.user?.details?.workPlace}"
-	                class="${hasErrors(bean: user, field: 'workPlace', 'errors')}"/>
+	                class="${hasErrors(bean: userDetails, field: 'workPlace', 'errors')}"/>
 	        </p>
 	        
 	        <p class="button">
@@ -98,15 +117,19 @@
 	        
 	    </g:form>
 	        
+	        <br />
+	        
+	        <p style="text-align:center;display:block;">
+				<g:form action="uploadProfilePhoto" method="post" enctype="multipart/form-data">
+					<label for="profilePhoto">Profile photo</label>
+					<input type="file" name="profilePhoto" id="profilePhoto" />
+					<input type="submit" class="buttons" value="Upload" />
+				</g:form>
+	        </p>
+	        
 	        <p>
-	        	<fieldset>
-					<legend>Photo Upload</legend>
-					<g:form action="uploadProfilePhoto" method="post" enctype="multipart/form-data">
-						<label for="profilePhoto">Photo</label>
-						<input type="file" name="profilePhoto" id="profilePhoto" />
-						<input type="submit" class="buttons" value="Upload" />
-					</g:form>
-				</fieldset>
+	        	<br />
+	        	<g:link controller="UserEdit" action="deleteProfilePhoto" class="button">Delete photo</g:link>
 	        </p>
     
     </g:if>
