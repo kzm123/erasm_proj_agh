@@ -26,9 +26,7 @@ class UserEditController {
             }
             
             if (!domainUser.details.save()) {
-                if (!domainUser.details.save()) {
-                    render(view: 'edit', model: [userDetails: domainUser.details, user: domainUser])
-                }
+                render(view: 'edit', model: [userDetails: domainUser.details, user: domainUser])
             }
             
             for (param in params) {
