@@ -9,7 +9,8 @@
     </head>
     
     <body>
-    <g:form class="userform" url="[controller: 'user', action: 'register']">
+    
+    <g:form class="form" url="[controller: 'user', action: 'register']">
         <h1>Registration</h1>
         
         <g:hasErrors bean="${user}">
@@ -45,7 +46,8 @@
         </p>
         <p>
         	<label for="gender">Gender</label>
-			<g:radioGroup name="gender" labels="['Man','Woman']" values="['true','false']" value="${user?.details?.gender}" class="${hasErrors(bean: details, field: 'gender', 'errors')}">
+			<g:radioGroup name="gender" labels="['Man','Woman']" values="['true','false']" 
+				value="${user?.details?.gender}" class="${hasErrors(bean: details, field: 'gender', 'errors')}">
 				<span>${it.radio} ${it.label}</span>
 			</g:radioGroup>
         </p>
