@@ -7,11 +7,11 @@ class User {
     static mapping = {
         table 'users'
     }
+    
+    static hasOne = [details: UserDetails]
 
     String username
     String passwordHashed
-	
-	UserDetails details
 	    
 	String profilePhoto
 	

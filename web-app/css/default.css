@@ -46,22 +46,22 @@ img#logo {
     height: 106px;
 }
 
-.userform {
+.form {
   margin: 0 auto;
   width: 70%;
 }
 
-.userform p {
+.form p {
   clear: left;
   margin: 10px 0;
 }
 
-.userform p.info {
+.form p.info {
   text-align: center;
   color: #666;
 }
 
-.userform label {
+.form label {
   float: left;
   width: 30%;
   text-align: right;
@@ -70,12 +70,12 @@ img#logo {
   margin-right: 16px;
  }
 
-.userform input {
+.form input {
   font-size: 15px;
   border: 1px solid #0018a8;
 }
 
-.userform p input.button {
+.form p input.button {
   display: inline;
   padding: 0 8px 0 8px;
   text-align: center;
@@ -84,7 +84,7 @@ img#logo {
   color: #fff;
 }
 
-.userform p input.button:hover {
+.form p input.button:hover {
   background: #017834;
   color: #fff;
   border: 1px solid #017834;
@@ -95,11 +95,11 @@ div#buttons {
 	text-align: right;
 }
 
-.userform input:focus, .userform select:focus, .userform textarea:focus {
+.form input:focus, .form select:focus, .form textarea:focus {
   border: 1px solid #017834;
 }
 
-.userform p .errors {
+.form p .errors {
     border: 1px solid #e40b37;
 }
 
@@ -119,12 +119,12 @@ a.button:hover {
 	border: 1px solid #017834;
 }
 
-ul.profileinfo {
+ul.info {
 	padding-top: 10px;
 	list-style-type: none;
 }
 
-ul.profileinfo li {
+ul.info li {
 	line-height: 24px;
 }
 
