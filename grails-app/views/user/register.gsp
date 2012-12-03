@@ -9,13 +9,16 @@
     </head>
     
     <body>
-    <g:form class="userform" url="[controller: 'user', action: 'register']">
+    
+    <g:form class="form" url="[controller: 'user', action: 'register']">
         <h1>Registration</h1>
+        
         <g:hasErrors bean="${user}">
             <div class="errors">
                 <g:renderErrors bean="${user}"/>
             </div>
         </g:hasErrors>
+		
         <p>
             <label for="username">Username</label>
             <g:textField name="username" value="${user?.username}" 
@@ -23,29 +26,32 @@
         </p>
         <p>
             <label for="password">Password</label>
-            <g:passwordField name="password"
+            <g:passwordField name="password" value="${user?.password}" 
                 class="${hasErrors(bean: user, field: 'password', 'errors')}"/>
         </p>
         <p>
             <label for="confirm">Confirm Password</label>
-            <g:passwordField name="confirm"
+            <g:passwordField name="confirm" value="${user?.confirm}" 
                 class="${hasErrors(bean: user, field: 'confirm', 'errors')}"/>
         </p>
         <p>
             <label for="name">First Name</label>
             <g:textField name="name" value="${user?.details?.name}"
-                class="${hasErrors(bean: userDetails, field: 'name', 'errors')}"/>
+                class="${hasErrors(bean: details, field: 'name', 'errors')}"/>
         </p>
         <p>
             <label for="surname">Last Name</label>
             <g:textField name="surname" value="${user?.details?.surname}"
-                class="${hasErrors(bean: userDetails, field: 'surname', 'errors')}"/>
+                class="${hasErrors(bean: details, field: 'surname', 'errors')}"/>
         </p>
         <p>
         	<label for="gender">Gender</label>
-        	<g:checkBox name="gender" value="${user?.details?.gender}" 
-        		class="${hasErrors(bean: userDetails, field: 'gender', 'errors')}"/>
+			<g:radioGroup name="gender" labels="['Man','Woman']" values="['true','false']" 
+				value="${user?.details?.gender}" class="${hasErrors(bean: details, field: 'gender', 'errors')}">
+				<span>${it.radio} ${it.label}</span>
+			</g:radioGroup>
         </p>
+		
         <p class="button">
             <label>&nbsp;</label>
             <g:submitButton class="button" name="submitButton" value="Create Account" />
