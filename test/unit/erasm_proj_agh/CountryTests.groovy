@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package erasm_proj_agh
 
 
@@ -51,22 +51,3 @@ class CountryTests {
         assertTrue test.validate()
     }
 }
-=======
-package erasm_proj_agh
-
-
-
-import grails.test.mixin.*
-import org.junit.*
-
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
-@TestFor(Country)
-class CountryTests {
-
-    void testSomething() {
-       fail "Implement me"
-    }
-}
->>>>>>> e3d8e3a85e47fba4063c331e2514beebed4d2b81
