@@ -3,15 +3,16 @@
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     
-    <head>
-        <title>Erasm Experience - Registration</title>
-        <meta name="layout" content="main" />
-    </head>
+<head>
+    <title>Erasm Experience - Registration</title>
+    <meta name="layout" content="main" />
+</head>
+
+<body>
     
-    <body>
+	<h1>Registration</h1>
     
     <g:form class="form" url="[controller: 'user', action: 'register']">
-        <h1>Registration</h1>
         
         <g:hasErrors bean="${user}">
             <div class="errors">
@@ -24,30 +25,41 @@
             <g:textField name="username" value="${user?.username}" 
                 class="${hasErrors(bean: user, field: 'username', 'errors')}"/>
         </p>
+        
         <p>
             <label for="password">Password</label>
             <g:passwordField name="password" value="${user?.password}" 
                 class="${hasErrors(bean: user, field: 'password', 'errors')}"/>
         </p>
+        
         <p>
             <label for="confirm">Confirm Password</label>
             <g:passwordField name="confirm" value="${user?.confirm}" 
                 class="${hasErrors(bean: user, field: 'confirm', 'errors')}"/>
         </p>
+        
         <p>
             <label for="name">First Name</label>
             <g:textField name="name" value="${user?.details?.name}"
-                class="${hasErrors(bean: details, field: 'name', 'errors')}"/>
+                class="${hasErrors(bean: user, field: 'details.name', 'errors')}"/>
         </p>
+        
         <p>
             <label for="surname">Last Name</label>
             <g:textField name="surname" value="${user?.details?.surname}"
-                class="${hasErrors(bean: details, field: 'surname', 'errors')}"/>
+                class="${hasErrors(bean: user, field: 'details.surname', 'errors')}"/>
         </p>
+	        
+        <p>
+            <label for="email">e-mail</label>
+            <g:textField name="email" value="${user?.details?.email}"
+                class="${hasErrors(bean: user, field: 'details.email', 'errors')}"/>
+        </p>
+        
         <p>
         	<label for="gender">Gender</label>
 			<g:radioGroup name="gender" labels="['Man','Woman']" values="['true','false']" 
-				value="${user?.details?.gender}" class="${hasErrors(bean: details, field: 'gender', 'errors')}">
+				value="true" class="${hasErrors(bean: details, field: 'gender', 'errors')}">
 				<span>${it.radio} ${it.label}</span>
 			</g:radioGroup>
         </p>
@@ -56,6 +68,9 @@
             <label>&nbsp;</label>
             <g:submitButton class="button" name="submitButton" value="Create Account" />
         </p>
+        
     </g:form>
-    </body>
+    
+</body>
+
 </html>

@@ -17,6 +17,6 @@ class Place {
     static constraints = {
         name blank: false, nullable: false, size: 2..45
         localization blank: false, nullable: false, size: 2..45
-        rating blank: true, nullable: true
+        rating blank: true, nullable: true, range: 0..10
     }
 }

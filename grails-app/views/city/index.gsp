@@ -13,9 +13,15 @@
 	
 		<g:if test="${city}">
 		
-			<g:if test="${session?.user}">			
+			<g:if test="${session?.userid}">			
 				<div id="buttons">
 					<g:link controller="city" action="create" class="button">Create new city</g:link>
+					<g:if test="${userSignedIn}">
+						<g:link controller="user" action="signOutFromCity" class="button" id="${city.id}">Sign out from this city</g:link>
+					</g:if>
+					<g:else>
+						<g:link controller="user" action="signInToCity" class="button" id="${city.id}">Sign in to this city</g:link>
+					</g:else>
 				</div>
 			</g:if>
 			
@@ -47,43 +53,47 @@
 			
 			</g:if>
 			
-			<br />
+			<g:if test="${session.userid}">
 			
-			<h2>Add new place to this city</h2>
+				<br />
 				
-			<g:form class="form" url="[controller: 'city', action: 'addPlace']">
-		        
+				<h2>Add new place to this city</h2>
+			        
 		        <g:hasErrors bean="${place}">
 		            <div class="errors">
 		                <g:renderErrors bean="${place}"/>
 		            </div>
 		        </g:hasErrors>
-				
-		        <p>
-		            <label for="name">Place Name</label>
-		            <g:textField name="name" class="${hasErrors(bean: place, field: 'name', 'errors')}"/>
-		        </p>
-		        <p>
-		            <label for="localization">Localization</label>
-		            <g:textArea name="localization" class="${hasErrors(bean: place, field: 'localization', 'errors')}"/>
-		        </p>
-		        <p>
-		            <label for="city">City</label>
-		            <g:textField name="city" class="${hasErrors(bean: place, field: 'localization', 'errors')}" value="${city.name}" />
-		        </p>
-				
-		        <p class="button">
-		            <label>&nbsp;</label>
-		            <g:submitButton class="button" name="submitButton" value="Add place" />
-		        </p>
-	        
-	    	</g:form>
+					
+				<g:form class="form" url="[controller: 'city', action: 'addPlace']">
+					
+			        <p>
+			            <label for="name">Place Name</label>
+			            <g:textField name="name" class="${hasErrors(bean: place, field: 'name', 'errors')}"/>
+			        </p>
+			        <p>
+			            <label for="localization">Localization</label>
+			            <g:textArea name="localization" class="${hasErrors(bean: place, field: 'localization', 'errors')}"/>
+			        </p>
+			        <p>
+			            <label for="city">City</label>
+			            <g:textField name="city" class="${hasErrors(bean: place, field: 'city', 'errors')}" value="${city.name}" />
+			        </p>
+					
+			        <p class="button">
+			            <label>&nbsp;</label>
+			            <g:submitButton class="button" name="submitButton" value="Add place" />
+			        </p>
+		        
+		    	</g:form>
+	    	
+	    	</g:if>
 		
 		</g:if>
 		
 		<g:else>
 		
-			<g:if test="${session?.user}">
+			<g:if test="${session?.userid}">
 			
 				<h1>City ${params.city} not found! Would you like to create it?</h1>
 				
