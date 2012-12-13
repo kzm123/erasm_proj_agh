@@ -10,25 +10,24 @@
     
     <body>
     
-    <g:if test="${session?.user}">
+    <g:if test="${user}">
     		
    		<h1>
-			${session?.user?.details?.name} ${session?.user?.details?.surname} - Edit Profile
+			${user?.details?.name} ${user?.details?.surname} - Edit Profile
 		</h1>
+	        
+        <g:hasErrors bean="${user}">
+			<div class="errors">
+			    <g:renderErrors bean="${user}"/>
+			</div>
+		</g:hasErrors>
+				
+		<g:if test="${flash.message}">
+			<br />
+			<div class="message">${flash.message}</div>
+		</g:if>
     
 	    <g:form class="form" url="[controller: 'user', action: 'edit']">
-	        
-	        <g:hasErrors bean="${user}">
-				<div class="errors">
-				    <g:renderErrors bean="${user}"/>
-				</div>
-			</g:hasErrors>
-	        
-			<g:hasErrors bean="${userDetails}">
-				<div class="errors">
-				    <g:renderErrors bean="${userDetails}"/>
-				</div>
-			</g:hasErrors>
 	        
 	        <p>
 	            <label for="password">Password</label>
@@ -44,27 +43,27 @@
 	        
 	        <p>
 	            <label for="firstName">First Name</label>
-	            <g:textField name="name" value="${session?.user?.details?.name}"
-	                class="${hasErrors(bean: userDetails, field: 'name', 'errors')}"/>
+	            <g:textField name="name" value="${user?.details?.name}"
+	                class="${hasErrors(bean: user, field: 'details.name', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="lastName">Last Name</label>
-	            <g:textField name="surname" value="${session?.user?.details?.surname}"
-	                class="${hasErrors(bean: userDetails, field: 'surname', 'errors')}"/>
+	            <g:textField name="surname" value="${user?.details?.surname}"
+	                class="${hasErrors(bean: user, field: 'details.surname', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	        	<label for="gender">Gender</label>
-	        	<g:if test="${session?.user?.details?.gender}">
+	        	<g:if test="${user?.details?.gender}">
 		        	<g:radioGroup name="gender" labels="['Man','Woman']" values="['true','false']" value="true" 
-						 class="${hasErrors(bean: userDetails, field: 'gender', 'errors')}">
+						 class="${hasErrors(bean: user, field: 'details.gender', 'errors')}">
 						<span>${it.radio} ${it.label}</span>
 					</g:radioGroup>
 	        	</g:if>
 	        	<g:else>
 		        	<g:radioGroup name="gender" labels="['Man','Woman']" values="['true','false']" value="false" 
-						 class="${hasErrors(bean: userDetails, field: 'gender', 'errors')}">
+						 class="${hasErrors(bean: user, field: 'details.gender', 'errors')}">
 						<span>${it.radio} ${it.label}</span>
 					</g:radioGroup>
 	        	</g:else>
@@ -73,51 +72,57 @@
 	        
 	        <p>
 	            <label for="email">e-mail</label>
-	            <g:textField name="email" value="${session?.user?.details?.email}"
-	                class="${hasErrors(bean: userDetails, field: 'email', 'errors')}"/>
+	            <g:textField name="email" value="${user?.details?.email}"
+	                class="${hasErrors(bean: user, field: 'details.email', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="city">City</label>
-	            <g:textField name="city" value="${session?.user?.details?.city}"
-	                class="${hasErrors(bean: userDetails, field: 'city', 'errors')}"/>
+	            <g:textField name="city" value="${user?.details?.city}"
+	                class="${hasErrors(bean: user, field: 'details.city', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="address">Address</label>
-	            <g:textField name="address" value="${session?.user?.details?.address}"
-	                class="${hasErrors(bean: userDetails, field: 'address', 'errors')}"/>
+	            <g:textField name="address" value="${user?.details?.address}"
+	                class="${hasErrors(bean: user, field: 'address', 'errors')}"/>
 	        </p>
 
 			<p>
 				<label for="country">Country</label>
 				<g:select name="country" from="${erasm_proj_agh.Country.list()}" noSelection="${['null': 'Choose']}"
-					optionKey="id" value="${session?.user?.details?.country?.id}" />
+					optionKey="id" value="${user?.details?.country?.id}" />
 			</p>
 	        
 	        <p>
 	        	<label for="dateOfBirth">Date of Birth</label>
 	        	<g:datePicker name="dateOfBirth" value="${user?.details?.dateOfBirth}"
-	        		precision="day" noSelection="['':'Choose']" relativeYears="[-100..-10]"
-	        		class="${hasErrors(bean: userDetails, field: 'dateOfBirth', 'errors')}"/>
+	        		default="none" precision="day" noSelection="['':'-']" 
+	        		years="${Calendar.instance.get(Calendar.YEAR)-100 .. Calendar.instance.get(Calendar.YEAR)-13}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="university">University</label>
-	            <g:textField name="university" value="${session?.user?.details?.university}"
-	                class="${hasErrors(bean: userDetails, field: 'university', 'errors')}"/>
+	            <g:textField name="university" value="${user?.details?.university}"
+	                class="${hasErrors(bean: user, field: 'details.university', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="highSchool">High School</label>
-	            <g:textField name="highSchool" value="${session?.user?.details?.highSchool}"
-	                class="${hasErrors(bean: userDetails, field: 'highSchool', 'errors')}"/>
+	            <g:textField name="highSchool" value="${user?.details?.highSchool}"
+	                class="${hasErrors(bean: user, field: 'details.highSchool', 'errors')}"/>
 	        </p>
 	        
 	        <p>
 	            <label for="workPlace">Work Place</label>
-	            <g:textField name="workPlace" value="${session?.user?.details?.workPlace}"
-	                class="${hasErrors(bean: userDetails, field: 'workPlace', 'errors')}"/>
+	            <g:textField name="workPlace" value="${user?.details?.workPlace}"
+	                class="${hasErrors(bean: user, field: 'details.workPlace', 'errors')}"/>
+	        </p>
+	        
+	        <p>
+	            <label for="phone">Phone</label>
+	            <g:textField name="phone" value="${user?.details?.phone}"
+	                class="${hasErrors(bean: user, field: 'details.phone', 'errors')}"/>
 	        </p>
 	        
 	        <p class="button">
