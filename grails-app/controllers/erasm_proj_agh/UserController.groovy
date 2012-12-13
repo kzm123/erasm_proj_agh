@@ -13,6 +13,7 @@ class UserController {
     def show() {
         if (params.user) {
             def user = User.findByUsername(params.user)
+            
             render(view: 'show', model: [user: user])
         } else if (session.username) {
             redirect(action: 'show', params: [user: session.username])
@@ -197,11 +198,17 @@ class UserController {
     def signInToCity() {
         if (session.userid) {
             def user = User.get(session.userid)
-            user.city = City.get(params.id)
+            def city = City.get(params.id)
+            
+            UserCity.link(user, city)
+            
             user.password = "example_password"
             user.confirm = "example_password"
+            
             user.save()
-            redirect(controller: 'city', params: [city: user.city.name])
+            city.save()
+            
+            redirect(controller: 'city', params: [city: city.name])
         } else {
             redirect(controller: 'main')
         }
@@ -210,11 +217,17 @@ class UserController {
     def signOutFromCity() {
         if (session.userid) {
             def user = User.get(session.userid)
-            user.city = null
+            def city = City.get(params.id)
+
+            UserCity.unlink(user, city)
+            
             user.password = "example_password"
             user.confirm = "example_password"
+            
             user.save()
-            redirect(controller: 'city', params: [id: params.id])
+            city.save()
+            
+            redirect(controller: 'city', params: [city: city.name])
         } else {
             redirect(controller: 'main')
         }

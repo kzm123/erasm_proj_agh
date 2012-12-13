@@ -97,7 +97,8 @@
 	        <p>
 	        	<label for="dateOfBirth">Date of Birth</label>
 	        	<g:datePicker name="dateOfBirth" value="${user?.details?.dateOfBirth}"
-	        		precision="day" />
+	        		default="none" precision="day" noSelection="['':'-']" 
+	        		years="${Calendar.instance.get(Calendar.YEAR)-100 .. Calendar.instance.get(Calendar.YEAR)-13}"/>
 	        </p>
 	        
 	        <p>

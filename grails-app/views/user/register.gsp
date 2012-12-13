@@ -59,7 +59,7 @@
         <p>
         	<label for="gender">Gender</label>
 			<g:radioGroup name="gender" labels="['Man','Woman']" values="['true','false']" 
-				value="true" class="${hasErrors(bean: details, field: 'gender', 'errors')}">
+				value="${user?.details?.gender == null ? true : user?.details?.gender}" class="${hasErrors(bean: details, field: 'gender', 'errors')}">
 				<span>${it.radio} ${it.label}</span>
 			</g:radioGroup>
         </p>

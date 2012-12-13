@@ -11,10 +11,7 @@ class CityController {
             def places = Place.findAllWhere(city: city)
             
             def user = User.get(session.userid)
-            def userSignedIn = false 
-            if (user.city == city) {
-                userSignedIn = true
-            }
+            def userSignedIn = UserCity.isLinked(user, city)
             
             render(view: 'index', model: [city: city, places: places, userSignedIn: userSignedIn])
         } else {

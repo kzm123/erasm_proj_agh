@@ -9,9 +9,10 @@ class SearchController {
     def find() {
         if (request.method == 'POST') {
             if (params.search) {
-                def users = User.findByUsernameLike("%" + params.search + "%")
-                def cities = City.findByNameLike("%" + params.search + "%")
-                def places = Place.findByNameLike("%" + params.search + "%")
+                def users = User.findAllByUsername(params.search)
+                def cities = City.findAllByNameLike("%" + params.search + "%")
+                def places = Place.findAllByNameLike("%" + params.search + "%")
+                
                 render(view: 'index', model: [users: users, cities: cities, places: places])
             } else {
                 redirect(action: "index")

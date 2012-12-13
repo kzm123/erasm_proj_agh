@@ -7,7 +7,7 @@ class City {
     }
     
     static belongsTo = [country: Country]
-    static hasMany = [users: User]
+    static hasMany = [userCities: UserCity]
     
     String name
     String description

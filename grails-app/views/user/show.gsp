@@ -70,11 +70,13 @@
 					<li>Phone: ${user?.details?.phone}</li>
 				</g:if>
 				
-				<g:if test="${user?.city}">
-					<li>Signed in to: 
-						<g:link controller="city" action="index" id="${user.city.id}">
-							${user.city.name}
-						</g:link>
+				<g:if test="${user?.userCities}">
+					<li>Signed in to:
+						<ul> 
+							<g:each in="${user?.userCities}">
+								<g:link controller="city" action="index" id="${it.city.id}"><li>${it.city.name}</li></g:link>
+							</g:each>
+						</ul>
 					</li>
 				</g:if>
 				
@@ -84,7 +86,7 @@
 		
 		<g:else>
 		    
-			<h1>User ${params.user} not found!</h1>
+			<h1>User ${params?.user} not found!</h1>
 	    
 	    </g:else>
 		

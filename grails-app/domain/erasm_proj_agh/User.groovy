@@ -8,8 +8,10 @@ class User {
         table 'users'
     }
     
-    static belongsTo = [city: City]
+    static hasMany = [userCities: UserCity]
     static hasOne = [details: UserDetails]
+    
+    static searchable = true
 
     String username
     String passwordHashed
@@ -29,7 +31,6 @@ class User {
 			}
 		}
         confirm bindable: true, blank: false, nullable: false
-        city blank: true, nullable: true
     }
 	
 	static transients = ['password', 'confirm']
