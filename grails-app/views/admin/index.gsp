@@ -15,6 +15,7 @@
 		
 			<div id="buttons">
 				<g:link controller="Admin" action="index" class="button">Home</g:link>
+				<g:link controller="Admin" action="query" class="button">Queries</g:link>
 				<g:link controller="Admin" action="editCities" class="button">City Database</g:link>
 				<g:link controller="Admin" action="logout" class="button">Logout</g:link>
 			</div>
@@ -27,9 +28,19 @@
 		
 		<g:else>
 		
-			<g:form class="userform" style="width:50%;" url="[controller: 'admin', action: 'login']">
+			<g:form class="form" style="width:50%;" url="[controller: 'admin', action: 'login']">
 			
 				<h1>Login</h1>
+				
+				<p>
+					<label for="login">Login</label>
+					<g:textField name="login" />
+				</p>
+				
+				<p>
+					<label for="password">Password</label>
+					<g:passwordField name="password" />
+				</p>
 				
 				<p class="button">
 					<label>&nbsp;</label>
