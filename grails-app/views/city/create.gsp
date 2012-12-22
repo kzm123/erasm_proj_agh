@@ -10,15 +10,15 @@
     
     <body>
     
-    <g:form class="form" url="[controller: 'city', action: 'create']">
-    
-        <h1>Create City</h1>
+    <h1>Create City</h1>
         
-        <g:hasErrors bean="${city}">
-            <div class="errors">
-                <g:renderErrors bean="${city}"/>
-            </div>
-        </g:hasErrors>
+    <g:hasErrors bean="${city}">
+        <div class="errors">
+            <g:renderErrors bean="${city}"/>
+        </div>
+    </g:hasErrors>
+    
+    <g:form class="form" url="[controller: 'city', action: 'create']">
 		
         <p>
             <label for="name">City Name</label>

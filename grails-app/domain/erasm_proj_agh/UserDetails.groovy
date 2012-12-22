@@ -17,17 +17,17 @@ class UserDetails {
     String phone
 
     static constraints = {
-        name blank: false, nullable: false, size: 2..45, matches: /[a-zA-Z-]+/
-        surname blank: false, nullable: false, size: 2..45, matches: /[a-zA-Z-]+/
+        name blank: false, nullable: false, size: 2..45, matches: "[a-zA-Z-]+"
+        surname blank: false, nullable: false, size: 2..45, matches: "[a-zA-Z-]+"
         gender blank: false, nullable: false
-        email blank: true, nullable: true, size: 6..45
+        email blank: false, nullable: false, size: 6..45, matches: "[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"
         city blank: true, nullable: true, size: 2..58
 		address blank: true, nullable: true, size: 3..45
-		country blank: true, nullable: true
 		dateOfBirth blank: true, nullable: true
+        country blank: true, nullable: true
 		university blank: true, nullable: true, size: 2..45
 		highSchool blank: true, nullable: true, size: 2..45
 		workPlace blank: true, nullable: true, size: 2..45
-        phone blank: true, nullable: true, size: 7..15, matches: /[0-9]+/
+        phone blank: true, nullable: true, size: 7..15, matches: "[0-9]+"
     }
 }

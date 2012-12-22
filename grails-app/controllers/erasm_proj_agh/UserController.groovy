@@ -2,109 +2,125 @@ package erasm_proj_agh
 
 class UserController {
     
-    def register = {
-        if (request.method == 'POST') {
-            def user = new User(params)
-            
-            user.details = new UserDetails(params)
-            
-            user.passwordHashed = params.password.encodeAsPassword()
-            if (!user.save()) {
-                render(view: 'register', model: [user: user])
-            } else {
-                session.user = user
-                redirect(controller: 'main')
-            }
-        } else if (session.user) {
+    def index() {
+        if (session.username) {
+            redirect(action: 'show', params: [user: session.username])
+        } else {
             redirect(controller: 'main')
         }
     }
+    
+    def show() {
+        if (params.user) {
+            def user = User.findByUsername(params.user)
+            
+            render(view: 'show', model: [user: user])
+        } else if (session.username) {
+            redirect(action: 'show', params: [user: session.username])
+        } else {
+            redirect(controller: 'main')
+        }
+    }
+    
+    def register() {
+        if (request.method == 'POST') {
+            def user = new User(params)
+            user.details = new UserDetails(params)
+            user.passwordHashed = params.password.encodeAsPassword()
+            
+            if (!user.save()) {
+                user.password = null
+                user.confirm = null
+                render(view: 'register', model: [user: user])
+            } else {
+                session.userid = user.id
+                session.username = user.username
+                redirect(action: 'show', params: [user: session.username])
+            }
+        } else if (session.username) {
+            redirect(action: 'show', params: [user: session.username])
+        }
+    }
 
-    def login = {
+    def login() {
         if (request.method == 'POST') {
             def passwordHashed = params.password.encodeAsPassword()
             def user = User.findByUsernameAndPasswordHashed(params.username, passwordHashed)
+            
             if (user) {
-                session.user = user
-                session.user.details = user.details
-                redirect(controller: 'main')
+                session.userid = user.id
+                session.username = user.username
+                redirect(action: 'show', params: [user: session.username])
             } else {
                 flash.message = "User not found or password incorrect"
                 redirect(controller: 'main')
             }
-        } else if (session.user) {
-            redirect(controller: 'main')
+        } else if (session.username) {
+            redirect(action: 'show', params: [user: session.username])
         }
     }
 
-    def logout = {
+    def logout() {
         session.invalidate()
         redirect(controller: 'main')
     }
 
     def edit() {
-        if ((request.method == 'POST') && session.user) {
-            def user = session.user
-            def domainUser = User.get(user.id)
+        if ((request.method == 'POST') && session.userid) {
+            def user = User.get(session.userid)
             
             for (param in params) {
+                
                 if (param.key == 'country') {
-                    if (param.key == null) {
-                        domainUser.details.properties['country'] = Country.get(Integer.parseInt(param.value))
+                    if (param.value != 'null') {
                         user.details.properties['country'] = Country.get(Integer.parseInt(param.value))
                     } else {
-                        domainUser.details.properties['country'] = null
                         user.details.properties['country'] = null
                     }
+                    
                 } else if (param.key == 'gender') {
                     if (param.value == 'true') {
-                        domainUser.details.properties['gender'] = true
                         user.details.properties['gender'] = true
                     } else {
-                        domainUser.details.properties['gender'] = false
                         user.details.properties['gender'] = false
                     }
+                    
                 } else if (param.key == 'password' || param.key == 'confirm') {
-                    if (param.key != '') {
-                        domainUser.properties[param.key] = param.value
+                    if (param.value != '' && param.value != null) {
                         user.properties[param.key] = param.value
                     }
+                    
+                } else if (param.value == null || param.value == "") {
+                    user.details.properties[param.key] = null
                 } else {
-                    if (param.value == "" || param.value == null) {
-                        domainUser.details.properties[param.key] = null
-                        user.details.properties[param.key] = null
-                    } else {
-                        domainUser.details.properties[param.key] = param.value
-                        user.details.properties[param.key] = param.value
-                    }
+                    user.details.properties[param.key] = param.value
                 }
             }
             
-            if (!domainUser.details.validate()) {
-                render(view: 'edit', model: [userDetails: domainUser.details, user: domainUser])
-                for (property in session.user.details.properties) {
-                    user.details.properties.property = domainUser.details.properties.property
-                }
-                println "after render"
-            } else {
-                //domainUser.passwordHashed = params.password.encodeAsPassword()
-                if (!domainUser.details.save()) {
-                    println "save error"
-                } else {
-                    for (property in session.user.details.properties) {
-                        user.details.properties.property = domainUser.details.properties.property
-                    }
-                    redirect(controller:'main')
-                }
+            if ((params['password'] == '' || params['password'] == null) && (params['confirm'] == '' || params['confirm'] == null)) {
+                user.properties['password'] = "example_password"
+                user.properties['confirm'] = "example_password"
             }
-        } else if (!session.user) {
-            redirect(controller:'main')
+            
+            if (params['password'] != '' && params['password'] != null) {
+                user.passwordHashed = params.password.encodeAsPassword()
+            }
+            
+            if (!user.save()) {
+                render(view: 'edit', model: [user: user])
+            } else {
+                redirect(action: 'show', params: [user: session.username])
+            }
+        } else if (session.userid) {
+            def user = User.get(session.userid)
+            render(view: 'edit', model: [user: user])
+        } else {
+            redirect(action: 'show', params: [user: session.username])
         }
     }
     
     def uploadProfilePhoto() {
-        def user = session.user
-        def domainUser = User.get(user.id)
+        def user = User.get(session.userid)
         
         def file = request.getFile('profilePhoto')
         
@@ -129,53 +145,92 @@ class UserController {
                 break
         }
         
-        if (user.profilePhoto != null) {
-            File oldPhoto = new File(user.profilePhoto)
-            if (oldPhoto.exists()) {
-                oldPhoto.delete()
-            }
-        }
-        
-        String filename = user.username + "." + extension
-        
-        user.profilePhoto = filename
-        domainUser.profilePhoto = filename
-        
-        if (!domainUser.save()) {
-            println "save error"
-            domainUser.errors.allErrors.each { println it }
-        }
-        
         if (!file.isEmpty()) {
-            println grailsAttributes.getApplicationContext().getResource("images/").getFile().toString() + File.separatorChar + filename
+            if (user.profilePhoto != null) {
+                File oldPhoto = new File(user.profilePhoto)
+                if (oldPhoto.exists()) {
+                    oldPhoto.delete()
+                }
+            }
+            
+            String filename = user.username + "." + extension
+            
             file.transferTo(new File(grailsAttributes.getApplicationContext().getResource("images/").getFile().toString() + File.separatorChar + filename))
-        } else {
-            flash.message = "File ${file.inspect()} was empty!"
-            render(view: 'edit', model: [user: user])
-            return;
-        }
+            
+            user.profilePhoto = filename
+            user.password = "example_password"
+            user.confirm = "example_password"
         
-        flash.message = "Photo uploaded successfully."
-        redirect(controller: 'main')
+            if (!user.save()) {
+                flash.message = "Photo save error."
+            } else {
+                flash.message = "Photo uploaded successfully."
+            }
+            render(view: 'edit', model: [user: user])
+        } else {
+            flash.message = "File is empty!"
+            render(view: 'edit', model: [user: user])
+        }
     }
     
     def deleteProfilePhoto() {
-        def user = session.user
-        def domainUser = User.get(user.id)
+        def user = User.get(session.userid)
         
         if (user.profilePhoto != null) {
-            File oldPhoto = new File(grailsAttributes.getApplicationContext().getResource("images/").getFile().toString() + File.separatorChar + domainUser.profilePhoto)
+            File oldPhoto = new File(grailsAttributes.getApplicationContext().getResource("images/").getFile().toString() + File.separatorChar + user.profilePhoto)
             if (oldPhoto.exists()) {
                 oldPhoto.delete()
             }
             
             user.profilePhoto = null
-            domainUser.profilePhoto = null
-            domainUser.save()
+            user.password = "example_password"
+            user.confirm = "example_password"
+            user.save()
             
             flash.message = "Photo deleted successfully."
+            
+            render(view: "edit", model: [user: user])
+        } else {
+            render(view: "edit", model: [user: user])
         }
-        redirect(controller: 'main')
+    }
+    
+    def signInToCity() {
+        if (session.userid) {
+            def user = User.get(session.userid)
+            def city = City.get(params.id)
+            
+            UserCity.link(user, city)
+            
+            user.password = "example_password"
+            user.confirm = "example_password"
+            
+            user.save()
+            city.save()
+            
+            redirect(controller: 'city', params: [city: city.name])
+        } else {
+            redirect(controller: 'main')
+        }
+    }
+    
+    def signOutFromCity() {
+        if (session.userid) {
+            def user = User.get(session.userid)
+            def city = City.get(params.id)
+
+            UserCity.unlink(user, city)
+            
+            user.password = "example_password"
+            user.confirm = "example_password"
+            
+            user.save()
+            city.save()
+            
+            redirect(controller: 'city', params: [city: city.name])
+        } else {
+            redirect(controller: 'main')
+        }
     }
     
 }

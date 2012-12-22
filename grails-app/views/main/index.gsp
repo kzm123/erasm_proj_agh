@@ -10,81 +10,8 @@
 	</head>
 
 	<body>
-	
-		<g:if test="${session?.user}">
 		
-			<div id="buttons">
-				<g:link controller="user" action="edit" class="button">Edit</g:link>
-				<g:link controller="user" action="logout" class="button">Logout</g:link>
-			</div>
-			
-			<h1>
-				${session?.user?.details?.name} ${session?.user?.details?.surname}
-			</h1>
-			
-			<ul class="info">
-			
-				<g:if test="${session?.user?.profilePhoto}">
-					<img src="${resource(dir: 'images', file: session.user.profilePhoto)}" />
-				</g:if>
-				
-				<li>Gender: 
-					<g:if test="${session?.user?.details?.gender}">male</g:if>
-					<g:else>female</g:else>
-				</li>
-			 	
-				<g:if test="${session?.user?.details?.email}">
-					<li>e-mail: ${session?.user?.details?.email}</li>
-				</g:if>
-				
-				<g:if test="${session?.user?.details?.city}">
-					<li>City: ${session?.user?.details?.city}</li>
-				</g:if>
-				
-				<g:if test="${session?.user?.details?.address}">
-					<li>Address: ${session?.user?.details?.address}</li>
-				</g:if>
-				
-				<g:if test="${session?.user?.details?.country}">
-					<li>Country: ${session?.user?.details?.country?.name}</li>
-				</g:if>
-			
-				<g:if test="${session?.user?.details?.dateOfBirth}">
-					<li>Date of Birth: <g:formatDate date="${session?.user?.details?.dateOfBirth}" type="date" style="LONG"/></li>
-				</g:if>
-				
-				<g:if test="${session?.user?.details?.university}">
-					<li>University: ${session?.user?.details?.university}</li>
-				</g:if>
-				
-				<g:if test="${session?.user?.details?.highSchool}">
-					<li>High School: ${session?.user?.details?.highSchool}</li>
-				</g:if>
-			
-				<g:if test="${session?.user?.details?.workPlace}">
-					<li>Work Place: ${session?.user?.details?.workPlace}</li>
-				</g:if>
-			</ul>
-		
-			<g:form class="form" style="width:50%;" url="[controller: 'city', action: 'find']">
-			
-				<h2>Find city</h2>
-				
-				<p>
-					<label for="findcity">City</label>
-					<g:textField name="findcity" />
-				</p>
-				
-				<p class="button">
-					<label>&nbsp;</label>
-					<g:submitButton class="button" name="submitButton" value="Find city" />
-				</p>
-				
-			</g:form>
-		
-		</g:if>
-		
-		<g:else>
+		<g:if test="${!session.user}">
 		
 			<g:form class="form" style="width:50%;" url="[controller: 'user', action: 'login']">
 			
@@ -116,7 +43,7 @@
 				
 			</g:form>
 		
-		</g:else>
+		</g:if>
 		
 	</body>
 

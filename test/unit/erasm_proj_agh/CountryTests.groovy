@@ -1,3 +1,4 @@
+
 package erasm_proj_agh
 
 
@@ -11,7 +12,42 @@ import org.junit.*
 @TestFor(Country)
 class CountryTests {
 
-    void testSomething() {
-       fail "Implement me"
+    
+    //państwo ma wiele szczegółów usera? eeee.
+    
+    void testName() {
+       
+        println "Wrong country name variations."
+        println "#"*20
+        
+        def test = new Country(
+                          name:"testCountry",
+                          description:"testDescription"
+
+         )
+         
+       assertTrue test.validate() 
+       
+        
+        println "Name is null"
+        test.name = null
+        assertFalse test.validate()
+        
+        
+        println "Name is blank"
+        test.name = ""
+        assertFalse test.validate()
+        
+        println "Name with polish signs"
+        test.name = "pąńśtwó"
+        assertTrue test.validate()
+        
+        println "Description is null"
+        test.description = null
+        assertTrue test.validate()
+        
+        println "Description is blank"
+        test.description = ""
+        assertTrue test.validate()
     }
 }

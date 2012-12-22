@@ -1,17 +1,60 @@
 package erasm_proj_agh
 
-
-
-import grails.test.mixin.*
-import org.junit.*
-
-/**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
+/*
+ * --------------------
+ * Maciek Prokopiuk
+ * --------------------
  */
-@TestFor(UserController)
-class UserControllerTests {
+import grails.test.GrailsUnitTestCase
+import org.codehaus.groovy.grails.plugins.testing.GrailsMockMultipartFile
 
-    void testSomething() {
-       fail "Implement me"
-    }
+
+@TestFor(UserController)
+@Mock(User)
+
+
+class UserControllerTests{
+
+        void testLogin(){
+          mockCodec(PasswordCodec) 
+             
+           request.method = "POST"
+           params.password = "haslo"
+           params.username = "testUser"
+           
+           controller.login()
+           assert response.redirectedUrl == '/main' 
+        }
+       
+        void testLogout() {
+            // testing if default session is null
+            assertNull controller.session.user
+            // creating new session user and testing if it is not null
+            controller.session.user = new User()
+            assertNotNull controller.session.user
+            controller.logout()
+            // testing redirection after logout
+            assertEquals "/main", controller.response.redirectedUrl
+            // testing session invalidation
+            assertNull controller.session.user
+        }
+       
+        void testRegister(){
+        mockForConstraintsTests(User)
+        mockCodec(PasswordCodec) 
+        
+        request.method = "POST"
+        params.username = "testUser"
+        params.password = "testPasswd"
+        params.confirm = "testPasswd"
+        params.name = "Maciek"
+        params.surname = "Prokopiuk"
+        params.gender = true
+        
+        controller.register()
+        assert response.redirectedUrl == '/main' 
+      }
+    
+
+      
 }

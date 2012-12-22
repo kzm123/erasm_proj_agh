@@ -22,6 +22,21 @@
 		<div id="nav"></div>
 		
 		<div id="content">
+		
+			<g:form class="form" style="width:50%;" url="[controller: 'search', action: 'find']">
+			
+				<p>
+					<label for="search">Search</label>
+					<g:textField name="search" />
+				</p>
+				
+				<p class="button">
+					<label>&nbsp;</label>
+					<g:submitButton class="button" name="submitButton" value="Search" />
+				</p>
+					
+			</g:form>
+			
 			<g:layoutBody />
 		</div>
 	  

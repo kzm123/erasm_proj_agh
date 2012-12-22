@@ -1,17 +1,28 @@
 package erasm_proj_agh
 
+import grails.test.GrailsUnitTestCase
 
-
-import grails.test.mixin.*
-import org.junit.*
-
-/**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
+/*
+ * --------------------
+ * Michał Darkowski
+ * >Biszu<
+ * --------------------
  */
+
 @TestFor(PlaceController)
+@Mock(Place)
 class PlaceControllerTests {
 
-    void testSomething() {
-       fail "Implement me"
-    }
+	void testIndex() {
+		// if (params.id)
+		params.id = "16"
+		controller.index()
+		assertEquals "/place/index", view
+		assertEquals Place.get(Integer.parseInt(params.id)), model.place
+
+		// else
+		params.id = null
+		controller.index()
+		assertEquals "/main", response.redirectedUrl
+	}
 }

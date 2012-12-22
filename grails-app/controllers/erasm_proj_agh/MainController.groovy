@@ -2,5 +2,10 @@ package erasm_proj_agh
 
 class MainController {
 
-    def index() { }
+    def index() {
+        if (session.username) {
+            redirect(controller: 'user')
+        }
+    }
+    
 }
