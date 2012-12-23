@@ -5,8 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 	<head>
-		<title>Erasm Experience - Homepage</title>
-		<meta name="layout" content="main" />
+		<title>Erasm Experience - Admin's Panel</title>
+		<meta name="layout" content="admin" />
 	</head>
 
 	<body>

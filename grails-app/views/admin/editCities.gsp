@@ -5,7 +5,7 @@
     
     <head>
         <title>Erasm Experience - City Database</title>
-        <meta name="layout" content="main" />
+        <meta name="layout" content="admin" />
     </head>
     
     <body>

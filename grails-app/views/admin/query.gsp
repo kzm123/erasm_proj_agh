@@ -6,7 +6,7 @@
 
 <head>
 <title>Erasm Experience - Admin's panel - Queries</title>
-<meta name="layout" content="main" />
+<meta name="layout" content="admin" />
 </head>
 
 <body>
@@ -29,10 +29,10 @@
 				<h2>Select table</h2>
 
 				<p align=center>
-					<g:select name="table" value="${it}" optionValue="${{it}}"
-						from="${tableList}" />
-
-					<g:submitButton class="button" name="submitButton" value="Show" />
+					<g:select name="table" value="${params.get('table')}" optionValue="${it}"
+						from="${tableList}"/>
+				
+					<g:actionSubmit class="button" name="submitButton" value="Select table" action="queryTable" table="${table}"/>
 				</p>
 				
 				<g:if test="${colNames}">
@@ -40,8 +40,9 @@
 					<table>
 						<tr>
 							<g:each in="${colNames}">
-								<g:sortableColumn property="${it}" title="${it}" />
-
+								<th style="width: 200px">
+									${it}
+								</th>
 							</g:each>
 							<th><u>REMOVE</u></th>
 						</tr>
@@ -54,13 +55,18 @@
 									</td>
 								</g:each>
 								<td>
-									<g:checkBox name="${it.getProperty(colNames.get(0))}" value="${false}" />
+									<g:checkBox name="Rem_${it.getProperty(colNames.get(0))}" value="${false}" />
 								</td>
 							</tr>
+							
+							
 						</g:each>
 					</table>
 						<br>
-						<g:submitButton class="button" name="submitButton" value="Remove selected" />
+						<g:actionSubmit class="button" name="submitButton" value="Search!" action="queryList"/>
+						<g:if test="${rowList}">
+							<g:actionSubmit class="button" name="submitButton" action="queryRemove" value="Remove selected" onclick="return confirm('Are you sure?')"/>
+						</g:if>
 					</center>
 					
 					
