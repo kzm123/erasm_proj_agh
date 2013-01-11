@@ -2,25 +2,25 @@ package erasm_proj_agh
 
 class CityController {
     
-    def index() {
+    def show() {
         if (params.id) {
             def city = City.get(params.id)
-            redirect(action: 'index', params: [city: city.name])
-        } else if (params.city) {
-            def city = City.findByName(params.city)
             def places = Place.findAllWhere(city: city)
+            def universities = University.findAllWhere(city: city)
             
             def user = User.get(session.userid)
             def userSignedIn = UserCity.isLinked(user, city)
             
-            render(view: 'index', model: [city: city, places: places, userSignedIn: userSignedIn])
+            render(view: 'show', model: [city: city, places: places, universities: universities, userSignedIn: userSignedIn])
         } else {
             redirect(controller: 'main')
         }
     }
 
     def create() {
-        if (request.method == 'POST' && session.userid) {
+        if (!session.userid) {
+            redirect(controller: 'main')
+        } else if (request.method == 'POST') {
             def city = new City()
             
             for (param in params) {
@@ -36,7 +36,7 @@ class CityController {
             if (!city.save()) {
                 render(view: 'create', model: [city: city])
             } else {
-                redirect(action: 'index', params: [city: city.name])
+                redirect(action: 'show', params: [id: city.id])
             }
         }
     }
@@ -56,9 +56,31 @@ class CityController {
             }
             
             if (!place.save()) {
-                render(view: 'index', model: [city: city, place: place])
+                render(view: 'show', model: [city: city, place: place])
             } else {
                 redirect(controller: 'place', params: [id: place.id])
+            }
+        }
+    }
+    
+    def addUniversity() {
+        if (request.method == 'POST' && session.userid) {
+            
+            def university = new University()
+            def city = City.findByName(params.city)
+            
+            for (param in params) {
+                if (param.key == 'city') {
+                    university.city = city
+                } else {
+                    university.properties[param.key] = param.value
+                }
+            }
+            
+            if (!university.save()) {
+                render(view: 'show', model: [city: city, university: university])
+            } else {
+                redirect(controller: 'university', action: 'show', params: [id: university.id])
             }
         }
     }

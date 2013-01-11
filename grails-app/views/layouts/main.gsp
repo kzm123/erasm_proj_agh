@@ -23,16 +23,17 @@
 		
 		<div id="content">
 		
-			<g:form class="form" style="width:50%;" url="[controller: 'search', action: 'find']">
+			<g:form method="GET" class="form" style="width:50%;" url="[controller: 'search', action: 'find']">
 			
 				<p>
 					<label for="search">Search</label>
-					<g:textField name="search" />
+					<g:textField name="search" value="${search}"/>
 				</p>
 				
 				<p class="button">
 					<label>&nbsp;</label>
-					<g:submitButton class="button" name="submitButton" value="Search" />
+					<button type="submit">Search</button>
+<%--					<g:submitButton class="button" name="submitButton" value="Search" />--%>
 				</p>
 					
 			</g:form>
