@@ -7,7 +7,7 @@ class City {
     }
     
     static belongsTo = [country: Country]
-    static hasMany = [userCities: UserCity]
+    static hasMany = [userCities: UserCity, universities: University]
     
     String name
     String description
@@ -15,7 +15,7 @@ class City {
     boolean confirmed
 
     static constraints = {
-        name blank: false, nullable: false, size: 2..58
+        name blank: false, nullable: false, size: 2..58, matches: /[-\.a-zA-Z0-9 ]+/
         description blank: true, nullable: true, size: 0..1000
     }
 }

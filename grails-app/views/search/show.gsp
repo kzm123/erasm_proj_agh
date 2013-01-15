@@ -13,7 +13,7 @@
 		
 		<h1>Search results</h1>
 		
-		<g:if test="${!users && !cities && !places}">
+		<g:if test="${!users && !cities && !places && !universities}">
 			<br /><p>Nothing found!</p>
 		</g:if>
 		
@@ -26,7 +26,7 @@
 				<h2>Users</h2>
 				<ul class="info">
 					<g:each in="${users}">
-						<g:link controller="user" action="show" id="${it.id}"><li>${it.username}</li></g:link>
+						<g:link controller="user" action="show" id="${it.user.id}"><li>${it.name} ${it.surname}</li></g:link>
 					</g:each>
 				</ul>
 			
@@ -39,7 +39,7 @@
 				<h2>Cities</h2>
 				<ul class="info">
 					<g:each in="${cities}">
-						<g:link controller="city" action="index" id="${it.id}"><li>${it.name}</li></g:link>
+						<g:link controller="city" action="show" id="${it.id}"><li>${it.name}</li></g:link>
 					</g:each>
 				</ul>
 			
@@ -52,7 +52,20 @@
 				<h2>Places</h2>
 				<ul class="info">
 					<g:each in="${places}">
-						<g:link controller="place" action="index" id="${it.id}"><li>${it.name}</li></g:link>
+						<g:link controller="place" action="show" id="${it.id}"><li>${it.name}</li></g:link>
+					</g:each>
+				</ul>
+				
+			</g:if>
+			
+			<g:if test="${universities}">
+			
+				<br />
+			
+				<h2>Universities</h2>
+				<ul class="info">
+					<g:each in="${universities}">
+						<g:link controller="university" action="show" id="${it.id}"><li>${it.name}</li></g:link>
 					</g:each>
 				</ul>
 				
@@ -62,7 +75,9 @@
 			
 		<br />
 		
-		<g:link controller="city" action="create" class="button">Create new city</g:link>
+		<g:if test="${session.username}">
+			<g:link controller="city" action="create" class="button">Create new city</g:link>
+		</g:if>
 		
 	</body>
 

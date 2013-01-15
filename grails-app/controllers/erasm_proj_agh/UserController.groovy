@@ -14,6 +14,20 @@ class UserController {
         if (params.user) {
             def user = User.findByUsername(params.user)
             
+            if ((user == null) && (params.user == session.username)) {
+                session.invalidate()
+                redirect(controller: 'main')
+            }
+            
+            render(view: 'show', model: [user: user])
+        } else if (params.id) {
+            def user = User.get(params.id)
+            
+            if ((user == null) && (params.id == session.userid)) {
+                session.invalidate()
+                redirect(controller: 'main')
+            }
+            
             render(view: 'show', model: [user: user])
         } else if (session.username) {
             redirect(action: 'show', params: [user: session.username])
@@ -208,7 +222,7 @@ class UserController {
             user.save()
             city.save()
             
-            redirect(controller: 'city', params: [city: city.name])
+            redirect(controller: 'city', action: 'show', params: [id: city.id])
         } else {
             redirect(controller: 'main')
         }
@@ -227,7 +241,7 @@ class UserController {
             user.save()
             city.save()
             
-            redirect(controller: 'city', params: [city: city.name])
+            redirect(controller: 'city', action: 'show', params: [id: city.id])
         } else {
             redirect(controller: 'main')
         }

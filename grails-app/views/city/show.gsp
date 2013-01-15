@@ -45,7 +45,23 @@
 				
 					<g:each in="${places}">
 					
-						<g:link controller="place" action="index" id="${it.id}"><li>${it.name}</li></g:link>
+						<g:link controller="place" action="show" id="${it.id}"><li>${it.name}</li></g:link>
+					
+					</g:each>
+				
+				</ul>
+			
+			</g:if>
+			
+			<g:if test="${universities}">
+			
+				<h2>Universities</h2>
+				
+				<ul class="info">
+				
+					<g:each in="${universities}">
+					
+						<g:link controller="university" action="show" id="${it.id}"><li>${it.name}</li></g:link>
 					
 					</g:each>
 				
@@ -83,6 +99,44 @@
 			        <p class="button">
 			            <label>&nbsp;</label>
 			            <g:submitButton class="button" name="submitButton" value="Add place" />
+			        </p>
+		        
+		    	</g:form>
+	    	
+	    	</g:if>
+			
+			<g:if test="${session.userid}">
+			
+				<br />
+				
+				<h2>Add new university to this city</h2>
+			        
+		        <g:hasErrors bean="${university}">
+		            <div class="errors">
+		                <g:renderErrors bean="${university}"/>
+		            </div>
+		        </g:hasErrors>
+					
+				<g:form class="form" url="[controller: 'city', action: 'addUniversity']">
+					
+			        <p>
+			            <label for="name">University Name</label>
+			            <g:textField name="name" class="${hasErrors(bean: university, field: 'name', 'errors')}"/>
+			        </p>
+			        
+			        <p>
+			            <label for="description">Description</label>
+			            <g:textArea name="description" class="${hasErrors(bean: university, field: 'description', 'errors')}"/>
+			        </p>
+			        
+			        <p>
+			            <label for="city">City</label>
+			            <g:textField name="city" class="${hasErrors(bean: university, field: 'city', 'errors')}" value="${city.name}" />
+			        </p>
+					
+			        <p class="button">
+			            <label>&nbsp;</label>
+			            <g:submitButton class="button" name="submitButton" value="Add university" />
 			        </p>
 		        
 		    	</g:form>

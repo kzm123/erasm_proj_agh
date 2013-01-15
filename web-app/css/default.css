@@ -103,6 +103,22 @@ div#buttons {
     border: 1px solid #e40b37;
 }
 
+button {
+	display: inline;
+	margin-left: -2px;
+	padding: 1px 6px;
+	text-align: center;
+	background: #0018a8;
+	border: 1px solid #0018a8;
+	color: #fff;
+}
+
+button:hover {
+	background: #017834;
+	color: #fff;
+	border: 1px solid #017834;
+}
+
 a.button {
 	display: inline;
 	margin-left: -2px;

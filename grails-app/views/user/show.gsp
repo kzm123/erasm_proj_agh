@@ -74,7 +74,7 @@
 					<li>Signed in to:
 						<ul> 
 							<g:each in="${user?.userCities}">
-								<g:link controller="city" action="index" id="${it.city.id}"><li>${it.city.name}</li></g:link>
+								<g:link controller="city" action="show" id="${it.city.id}"><li>${it.city.name}</li></g:link>
 							</g:each>
 						</ul>
 					</li>
