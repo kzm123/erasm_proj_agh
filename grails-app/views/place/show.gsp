@@ -19,7 +19,7 @@
 			
 				<li><g:if test="${place.localization}">Localization: ${place.localization}</g:if></li>
 				
-				<li>City: <g:link controller="city" action="index" params="[city: place.city.name]">${place.city.name}</g:link></li>
+				<li>City: <g:link controller="city" action="show" id="${place.city.id}">${place.city.name}</g:link></li>
 				
 			</ul>
 		

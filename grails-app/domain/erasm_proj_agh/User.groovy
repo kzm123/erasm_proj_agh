@@ -1,7 +1,5 @@
 package erasm_proj_agh
 
-import java.util.Date;
-
 class User {
 	
     static mapping = {
@@ -10,8 +8,6 @@ class User {
     
     static hasMany = [userCities: UserCity]
     static hasOne = [details: UserDetails]
-    
-    static searchable = true
 
     String username
     String passwordHashed
@@ -22,7 +18,7 @@ class User {
 	String confirm
 
     static constraints = {
-        username blank: false, nullable: false, size: 5..30, matches: /[a-zA-Z0-9_-]+/, unique: true
+        username blank: false, nullable: false, size: 5..30, matches: /[-_a-zA-Z0-9]+/, unique: true
 		profilePhoto blank: true, nullable: true
 		details blank: false, nullable: false
 		password bindable: true, blank: false, nullable: false, size: 5..30, validator: { val, obj ->
