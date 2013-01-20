@@ -29,12 +29,15 @@
 				<h2>Select table</h2>
 
 				<p align=center>
-					<g:select name="table" value="${params.get('table')}" optionValue="${it}"
-						from="${tableList}"/>
-				
-					<g:actionSubmit class="button" name="submitButton" value="Select table" action="queryTable" table="${table}"/>
+					<g:select name="table" value="${params.get('table')}"
+						optionValue="${it}" from="${tableList}" />
+
+					<g:actionSubmit class="button" name="submitButton"
+						value="Select table" action="queryTable" />
 				</p>
-				
+				<p>
+					${selectedTable}
+				</p>
 				<g:if test="${colNames}">
 					<center>
 					<table>
@@ -46,30 +49,40 @@
 							</g:each>
 							<th><u>REMOVE</u></th>
 						</tr>
-						
-						<g:each in="${rowList}">
+
+						<g:each in="${rowShown}">
 							<tr>
 								<g:each var="col" in="${colNames}">
 									<td>
 										${it.getProperty(col)}
 									</td>
 								</g:each>
-								<td>
-									<g:checkBox name="Rem_${it.getProperty(colNames.get(0))}" value="${false}" />
+								<td><g:checkBox
+										name="Rem_${it.getProperty(colNames.get(0))}" value="${false}" />
 								</td>
 							</tr>
-							
-							
+
+
 						</g:each>
 					</table>
-						<br>
-						<g:actionSubmit class="button" name="submitButton" value="Search!" action="queryList"/>
-						<g:if test="${rowList}">
-							<g:actionSubmit class="button" name="submitButton" action="queryRemove" value="Remove selected" onclick="return confirm('Are you sure?')"/>
+					<g:if test="${params.get('filled') == 't'}">
+						<g:each var="i" in="${ (1..rowPages) }">
+							<g:link controller="Admin" action="queryList" params="${ [table: params.get('table'), rowPage: i]}"> ${i}</g:link>
+						</g:each>
+					</g:if>
+
+					<p>
+						<g:actionSubmit class="button" name="actionButton" value="Search!"
+							action="queryList" id="${selectedTable}" />
+						<g:if test="${params.get('filled') == 't'}">
+							<g:actionSubmit class="button" name="submitButton"
+								action="queryRemove" value="Remove selected"
+								onclick="return confirm('Are you sure?')" />
 						</g:if>
+					</p>
 					</center>
-					
-					
+
+
 				</g:if>
 
 			</g:form>
