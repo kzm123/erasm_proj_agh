@@ -27,7 +27,9 @@
 				url="[controller: 'admin', action: 'query']">
 
 				<h2>Select table</h2>
-
+				<p align=right>
+					<g:link  controller="Admin" action="queryCustom">Custom query</g:link>
+				</p>
 				<p align=center>
 					<g:select name="table" value="${params.get('table')}"
 						optionValue="${it}" from="${tableList}" />
@@ -39,6 +41,14 @@
 					${selectedTable}
 				</p>
 				<g:if test="${colNames}">
+					<p>
+					Rows per page: <g:textField name="rowsPerPage" value="${params.get('rowsPerPage')}" />
+					</p>
+					<p>
+						WHERE 
+					</p>
+					<g:textArea name="whereStatement" value="${params.get('whereStatement')}"/>
+
 					<center>
 					<table>
 						<tr>
@@ -67,7 +77,10 @@
 					</table>
 					<g:if test="${params.get('filled') == 't'}">
 						<g:each var="i" in="${ (1..rowPages) }">
-							<g:link controller="Admin" action="queryList" params="${ [table: params.get('table'), rowPage: i]}"> ${i}</g:link>
+							<g:link controller="Admin" action="queryList"
+								params="${ [table: params.get('table'), rowPage: i, whereStatement: params.get('whereStatement'), rowsPerPage: params.get('rowsPerPage')]}">
+								${i}
+							</g:link>
 						</g:each>
 					</g:if>
 
