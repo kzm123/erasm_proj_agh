@@ -5,7 +5,7 @@
     
     <head>
         <title>Erasm Experience - City Database</title>
-        <meta name="layout" content="main" />
+        <meta name="layout" content="admin" />
     </head>
     
     <body>
@@ -14,6 +14,7 @@
     	
     	<div id="buttons">
     		<g:link controller="Admin" action="index" class="button">Home</g:link>
+    		<g:link controller="Admin" action="query" class="button">Queries</g:link>
 			<g:link controller="Admin" action="editCities" class="button">City Database</g:link>
 			<g:link controller="Admin" action="logout" class="button">Logout</g:link>
 		</div>
