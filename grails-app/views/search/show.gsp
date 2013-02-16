@@ -73,7 +73,7 @@
 			
 		</g:else>
 			
-		<br />
+		<br/>
 		
 		<g:if test="${session.username}">
 			<g:link controller="city" action="create" class="button">Create new city</g:link>
