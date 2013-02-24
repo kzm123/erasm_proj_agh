@@ -44,6 +44,9 @@
 				<p>
 					${selectedTable}
 				</p>
+				<g:if test="${flash.message}">
+					<div class="message">${flash.message}</div>
+				</g:if>
 				<g:if test="${colNames}">
 					<center>
 					<table>
@@ -67,7 +70,7 @@
 
 						</g:each>
 					</table>
-					<g:if test="${params.get('filled') == 't'}">
+					<g:if test="${colNames}">
 						<g:each var="i" in="${ (1..rowPages) }">
 							<g:link controller="Admin" action="queryCustom"
 								params="${ [rowPage: i, query: params.get('query'), rowsPerPage: params.get('rowsPerPage')]}">

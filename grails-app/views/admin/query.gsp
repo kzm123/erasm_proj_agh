@@ -28,7 +28,7 @@
 
 				<h2>Select table</h2>
 				<p align=right>
-					<g:link  controller="Admin" action="queryCustom">Custom query</g:link>
+					<g:link controller="Admin" action="queryCustom">Custom query</g:link>
 				</p>
 				<p align=center>
 					<g:select name="table" value="${params.get('table')}"
@@ -42,13 +42,19 @@
 				</p>
 				<g:if test="${colNames}">
 					<p>
-					Rows per page: <g:textField name="rowsPerPage" value="${params.get('rowsPerPage')}" />
+						Rows per page:
+						<g:textField name="rowsPerPage"
+							value="${params.get('rowsPerPage')}" />
 					</p>
-					<p>
-						WHERE 
-					</p>
-					<g:textArea name="whereStatement" value="${params.get('whereStatement')}"/>
+					<p>WHERE</p>
+					<g:textArea name="whereStatement"
+						value="${params.get('whereStatement')}" />
 
+					<g:if test="${flash.message}">
+						<div class="message">
+							${flash.message}
+						</div>
+					</g:if>
 					<center>
 					<table>
 						<tr>

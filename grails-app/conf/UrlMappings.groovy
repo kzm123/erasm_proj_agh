@@ -1,3 +1,5 @@
+import org.postgresql.util.PSQLException;
+
 class UrlMappings {
 
 	static mappings = {
@@ -9,5 +11,6 @@ class UrlMappings {
 
 		"/"(controller:"main")
 		"500"(view:'/error')
+		
 	}
 }

@@ -1,6 +1,7 @@
 package erasm_proj_agh
 
 import groovy.sql.Sql
+import org.postgresql.util.PSQLException
 
 class AdminController {
 	def sessionFactory
@@ -68,6 +69,8 @@ class AdminController {
 			def rowsPerPage = 2
 			if(params.get('rowsPerPage') != null && params.get('rowsPerPage').isInteger()){
 				rowsPerPage = Integer.parseInt(params.get('rowsPerPage'))
+				if (rowsPerPage < 1)
+					rowsPerPage = 1
 			}
 			
 			//List of selected stuff. Also number of rows pages, and list of rows shown.
@@ -79,10 +82,15 @@ class AdminController {
 						
 			//Get row list.
 			if(params.get('filled') == 't' && colNames.size() != 0){
-				if(params.get('whereStatement').equals(''))
-					rowList = sql.rows('SELECT * FROM ' + params.get('table')) {};
-				else
-					rowList = sql.rows('SELECT * FROM ' + params.get('table') + ' WHERE ' + params.get('whereStatement')) {};
+				try{
+					if(params.get('whereStatement').equals(''))
+						rowList = sql.rows('SELECT * FROM ' + params.get('table')) {};
+					else
+						rowList = sql.rows('SELECT * FROM ' + params.get('table') + ' WHERE ' + params.get('whereStatement')) {};
+				}catch(PSQLException ex){
+					flash.message = ex.getMessage()
+					rowList = []
+				}
 				//Caluclates how many pages for displaying all rows.
 				rowPages = Math.ceil(rowList.size / rowsPerPage )
 				def rowPage = 1
@@ -96,7 +104,7 @@ class AdminController {
 				//Get the list of shown rows.
 				def copyMax = Math.min((rowPage * rowsPerPage)-1, (rowList.size() - 1))
 				def copyMin = (rowPage-1)*rowsPerPage
-				System.out.println(copyMin.toString() + " " + copyMax.toString() + " " + ((rowPage * rowsPerPage)-1).toString() + " " + (rowList.size() - 1).toString() )
+//				System.out.println(copyMin.toString() + " " + copyMax.toString() + " " + ((rowPage * rowsPerPage)-1).toString() + " " + (rowList.size() - 1).toString() )
 				if(rowList.size() > 0){
 					rowShown = (copyMin..copyMax).collect {
 						rowList.get(it)
@@ -172,20 +180,25 @@ class AdminController {
 		def rowList = []
 		def rowPages
 		def rowsPerPage = 2
+		if(params.get('rowsPerPage') != null && params.get('rowsPerPage').isInteger()){
+			rowsPerPage = Integer.parseInt(params.get('rowsPerPage'))
+			if (rowsPerPage < 1)
+				rowsPerPage = 1
+		}
+		
 		def rowShown = []
 		
-		if(params.get('query')){
-			rowList = sql.rows(params.get('query')) { meta ->
-				colNames = (1..meta.columnCount).collect { meta.getColumnName(it) }
+		try{
+			if(params.get('query')){
+				rowList = sql.rows(params.get('query')) { meta ->
+					colNames = (1..meta.columnCount).collect { meta.getColumnName(it) }
+				}
 			}
+		}catch(PSQLException ex){
+		   flash.message = ex.getMessage()
 		}
 		
 		rowPages = Math.ceil(rowList.size / rowsPerPage )
-		
-		//Number of rows per page.
-		if(params.get('rowsPerPage') != null && params.get('rowsPerPage').isInteger()){
-			rowsPerPage = Integer.parseInt(params.get('rowsPerPage'))
-		}
 		
 		if(params.get('rowPage') != null && params.get('rowPage').isInteger() ){
 			rowPage = Integer.parseInt(params.get('rowPage'))
@@ -195,7 +208,7 @@ class AdminController {
 		//Get the list of shown rows.
 		def copyMax = Math.min((rowPage * rowsPerPage)-1, (rowList.size() - 1))
 		def copyMin = (rowPage-1)*rowsPerPage
-		System.out.println(copyMin.toString() + " " + copyMax.toString() + " " + ((rowPage * rowsPerPage)-1).toString() + " " + (rowList.size() - 1).toString() )
+//		System.out.println(copyMin.toString() + " " + copyMax.toString() + " " + ((rowPage * rowsPerPage)-1).toString() + " " + (rowList.size() - 1).toString() )
 		if(rowList.size() > 0){
 			rowShown = (copyMin..copyMax).collect {
 				rowList.get(it)
