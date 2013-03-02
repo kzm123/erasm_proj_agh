@@ -1,5 +1,9 @@
 package erasm_proj_agh
 
+import erasm_proj_agh.Faculty;
+import erasm_proj_agh.Major;
+import erasm_proj_agh.University;
+
 class UniversityController {
 
     def show() {

@@ -1,6 +1,15 @@
 package erasm_proj_agh
 
+import erasm_proj_agh.City;
+import erasm_proj_agh.Country;
+import erasm_proj_agh.Place;
+import erasm_proj_agh.University;
+import erasm_proj_agh.User;
+import erasm_proj_agh.UserCity;
+
 class CityController {
+    
+    def springSecurityService
     
     def show() {
         if (params.id) {
@@ -8,7 +17,7 @@ class CityController {
             def places = Place.findAllWhere(city: city)
             def universities = University.findAllWhere(city: city)
             
-            def user = User.get(session.userid)
+            def user = User.get(springSecurityService.principal.id)
             def userSignedIn = UserCity.isLinked(user, city)
             
             render(view: 'show', model: [city: city, places: places, universities: universities, userSignedIn: userSignedIn])
@@ -18,7 +27,7 @@ class CityController {
     }
 
     def create() {
-        if (!session.userid) {
+        if (!springSecurityService.isLoggedIn()) {
             redirect(controller: 'main')
         } else if (request.method == 'POST') {
             def city = new City()
@@ -42,7 +51,7 @@ class CityController {
     }
     
     def addPlace() {
-        if (request.method == 'POST' && session.userid) {
+        if (request.method == 'POST' && springSecurityService.isLoggedIn()) {
             
             def place = new Place()
             def city = City.findByName(params.city)
@@ -64,7 +73,7 @@ class CityController {
     }
     
     def addUniversity() {
-        if (request.method == 'POST' && session.userid) {
+        if (request.method == 'POST' && springSecurityService.isLoggedIn()) {
             
             def university = new University()
             def city = City.findByName(params.city)

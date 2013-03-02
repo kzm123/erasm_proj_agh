@@ -6,6 +6,8 @@ class Major {
     static mapping = {
         table 'majors'
     }
+    
+    static searchable = true
 
     static belongsTo = [faculty: Faculty]
     

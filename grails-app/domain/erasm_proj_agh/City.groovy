@@ -6,6 +6,8 @@ class City {
         table 'cities'
     }
     
+    static searchable = true
+    
     static belongsTo = [country: Country]
     static hasMany = [userCities: UserCity, universities: University]
     

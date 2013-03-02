@@ -1,5 +1,7 @@
 package erasm_proj_agh
 
+import erasm_proj_agh.Place;
+
 class PlaceController {
     
     def show() {

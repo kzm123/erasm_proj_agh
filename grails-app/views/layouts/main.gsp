@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
         
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   
@@ -12,7 +12,7 @@
 		<g:layoutHead />
 	</head>
   
-<body>
+<body  onload="${pageProperty(name:'body.onload')}">
 	<div id="wrapper">
 		  
 		<g:link controller="main">
@@ -23,11 +23,11 @@
 		
 		<div id="content">
 		
-			<g:form method="GET" class="form" style="width:50%;" url="[controller: 'search', action: 'find']">
+			<g:form method="GET" class="form" style="width:50%;" url="[controller: 'searchable', action: 'index']">
 			
 				<p>
-					<label for="search">Search</label>
-					<g:textField name="search" value="${search}"/>
+					<label for="q">Search</label>
+					<g:textField name="q" value="${params.q}" />
 				</p>
 				
 				<p class="button">

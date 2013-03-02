@@ -28,14 +28,14 @@
         
         <p>
             <label for="password">Password</label>
-            <g:passwordField name="password" value="${user?.password}" 
+            <g:passwordField name="password"
                 class="${hasErrors(bean: user, field: 'password', 'errors')}"/>
         </p>
         
         <p>
             <label for="confirm">Confirm Password</label>
-            <g:passwordField name="confirm" value="${user?.confirm}" 
-                class="${hasErrors(bean: user, field: 'confirm', 'errors')}"/>
+            <g:passwordField name="confirm"
+            	class="${hasErrors(bean: user, field: 'password', 'errors')}"/>
         </p>
         
         <p>

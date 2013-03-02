@@ -38,7 +38,7 @@
 	        <p>
 	            <label for="confirm">Confirm Password</label>
 	            <g:passwordField name="confirm"
-	                class="${hasErrors(bean: user, field: 'confirm', 'errors')}"/>
+	                class="${hasErrors(bean: user, field: 'password', 'errors')}"/>
 	        </p>
 	        
 	        <p>

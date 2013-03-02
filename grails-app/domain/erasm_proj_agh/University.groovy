@@ -7,6 +7,8 @@ class University {
     static mapping = {
         table 'universities'
     }
+    
+    static searchable = true
 
     static belongsTo = [city: City]
     static hasMany = [faculties: Faculty]

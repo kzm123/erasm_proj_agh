@@ -1,34 +1,68 @@
 package erasm_proj_agh
 
 class User {
-	
-    static mapping = {
-        table 'users'
-    }
+
+    transient springSecurityService
     
-    static hasMany = [userCities: UserCity]
+    static searchable = {
+        mapping {
+            boost 2.0
+            spellCheck "include"
+        }
+    }
+
+    static hasMany = [userCities: UserCity, statuses: Status, friends: User]
     static hasOne = [details: UserDetails]
 
     String username
-    String passwordHashed
-	    
-	String profilePhoto
-	
-	String password
-	String confirm
+    String password
+    boolean enabled
+    boolean accountExpired
+    boolean accountLocked
+    boolean passwordExpired
+    
+    String profilePhoto
 
     static constraints = {
-        username blank: false, nullable: false, size: 5..30, matches: /[-_a-zA-Z0-9]+/, unique: true
-		profilePhoto blank: true, nullable: true
-		details blank: false, nullable: false
-		password bindable: true, blank: false, nullable: false, size: 5..30, validator: { val, obj ->
-			if (obj.confirm != null) {
-				val == obj.confirm ? true : 'user.password.validator'
-			}
-		}
-        confirm bindable: true, blank: false, nullable: false
+        username blank: false, unique: true, size: 5..30, matches: /[-_a-zA-Z0-9]+/
+        password blank: false
+        profilePhoto blank: true, nullable: true
+        details blank: false, nullable: false
     }
-	
-	static transients = ['password', 'confirm']
+
+    static mapping = {
+        table 'users'
+        password column: '`password`'
+    }
+
+    Set<Authority> getAuthorities() {
+        UserAuthority.findAllByUser(this).collect { it.authority } as Set
+    }
+
+    def beforeInsert() {
+        encodePassword()
+    }
+
+    def beforeUpdate() {
+        if (isDirty('password')) {
+            encodePassword()
+        }
+    }
+
+    protected void encodePassword() {
+        password = springSecurityService.encodePassword(password)
+    }
+    
+    public addFriend(user) {
+        friends.add(user)
+    }
+    
+    public deleteFriend(user) {
+        friends.remove(user)
+    }
+    
+    public isMyFriend(user) {
+        friends.contains(user)
+    }
     
 }
