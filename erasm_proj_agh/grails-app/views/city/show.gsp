@@ -6,10 +6,50 @@
 
 	<head>
 		<title>Erasm Experience - City Page</title>
+		
+		<g:javascript library="jquery" plugin="jquery" />
+		<r:layoutResources/>
+		
 		<meta name="layout" content="main" />
+		
+		<g:if test="${city}">
+		
+        <script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqgA3m7G8sC2nwSn5y9L_cwz48NdBV-Y&sensor=false">
+	    </script>
+	    
+	    <script type="text/javascript">
+	    	var map, marker;
+	    	
+			function initialize() {
+				var mapOptions = {
+					center: new google.maps.LatLng(0, 0),
+					zoom: 8,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+				google.maps.event.addListener(map, 'click', function(event) {
+					placeMarker(event.latLng);
+				});
+			}
+
+			function placeMarker(location) {
+				if (marker != null) {
+					marker.setMap(null);
+				}
+				marker = new google.maps.Marker({
+					position: location,
+					map: map
+				});
+				$('input[name=location]').val(marker.getPosition().lat() + "," + marker.getPosition().lng());
+			}
+	    </script>
+		
+		</g:if>
 	</head>
 
-	<body>
+	<body onload="initialize()">
 	
 		<g:if test="${city}">
 		
@@ -87,10 +127,8 @@
 			            <label for="name">Place Name</label>
 			            <g:textField name="name" class="${hasErrors(bean: place, field: 'name', 'errors')}"/>
 			        </p>
-			        <p>
-			            <label for="localization">Localization</label>
-			            <g:textArea name="localization" class="${hasErrors(bean: place, field: 'localization', 'errors')}"/>
-			        </p>
+					<div id="map_canvas" style="width:400px; height:400px"></div>
+			        <g:hiddenField name="location" class="${hasErrors(bean: place, field: 'location', 'errors')}" />
 			        <p>
 			            <label for="city">City</label>
 			            <g:textField name="city" class="${hasErrors(bean: place, field: 'city', 'errors')}" value="${city.name}" />

@@ -4,7 +4,12 @@ class User {
 
     transient springSecurityService
     
-    static searchable = true
+    static searchable = {
+        mapping {
+            boost 2.0
+            spellCheck "include"
+        }
+    }
 
     static hasMany = [userCities: UserCity, statuses: Status, friends: User]
     static hasOne = [details: UserDetails]

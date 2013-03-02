@@ -122,9 +122,6 @@
           </li>
         </ul>
       </g:if>
-	  <sec:ifLoggedIn>
-		<g:link controller="city" action="create" class="button">Create new city</g:link>
-	  </sec:ifLoggedIn>
     </g:if>
 
     <g:if test="${searchResult?.suggestedQuery}">
@@ -162,7 +159,7 @@
           </div>
         </g:each>
       </div>
-
+      
       <div>
         <div class="paging">
           <g:if test="${haveResults}">
@@ -174,6 +171,11 @@
         </div>
       </div>
     </g:if>
+    
+	<sec:ifLoggedIn>
+		<g:link controller="city" action="create" class="button">Create new city</g:link>
+	</sec:ifLoggedIn>
+    
   </div>
   </body>
 </html>
