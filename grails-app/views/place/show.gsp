@@ -7,7 +7,6 @@
 	<head>
 		<title>Erasm Experience - place Page</title>
 		<meta name="layout" content="main" />
-<<<<<<< HEAD
 		
 		<g:if test="${place}">
         
@@ -37,18 +36,15 @@
         
         </g:if>
         
+	  	<g:javascript library='jquery' />
+   		<r:layoutResources/>
+    
 	</head>
 
 	<body onload="initialize()">
 	
-=======
-	  	<g:javascript library='jquery' />
-   		<r:layoutResources/>
-   
-    
-	</head>
 	<body>
->>>>>>> 1833222470bf069b502f36ccf4dc9224cdff57f0
+		
 		<g:if test="${place}">
 		
 			<h1>Place ${place?.name}</h1>
@@ -56,6 +52,8 @@
 			<ul class="info">
 				
 				<li>City: <g:link controller="city" action="index" params="[city: place.city.name]">${place.city.name}</g:link></li>
+
+				<div id="map_canvas" style="width:400px; height:400px"></div>
 				
 				<div class="rating" >
 				
@@ -68,11 +66,7 @@
 				</g:if>${place.rating }
 				</div>
 			</ul>
-<<<<<<< HEAD
-			
-			<div id="map_canvas" style="width:400px; height:400px"></div>
-		
-=======
+
 			<div class="comments">
 			<g:form action="comment">
 				<g:hiddenField name="id" value="${place.id }"/>
@@ -95,8 +89,6 @@
 				</div>
 			</g:each>		
 			</tr>
-			
->>>>>>> 1833222470bf069b502f36ccf4dc9224cdff57f0
 		</g:if>
 		
 		<g:else>

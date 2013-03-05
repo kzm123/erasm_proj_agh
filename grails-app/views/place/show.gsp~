@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+	<head>
+		<title>Erasm Experience - place Page</title>
+		<meta name="layout" content="main" />
+		
+		<g:if test="${place}">
+        
+        <script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqgA3m7G8sC2nwSn5y9L_cwz48NdBV-Y&sensor=false">
+	    </script>
+	    
+	    <script type="text/javascript">
+	    	var map, marker;
+	    	
+			function initialize() {
+				var location = new google.maps.LatLng(${place.location});
+				
+				var mapOptions = {
+					center: location,
+					zoom: 8,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+				marker = new google.maps.Marker({
+					position: location,
+					map: map
+				});
+			}
+	    </script>
+        
+        </g:if>
+        
+	</head>
+
+	<body onload="initialize()">
+	
+		<g:if test="${place}">
+		
+			<h1>Place ${place?.name}</h1>
+			
+			<ul class="info">
+				
+				<li>City: <g:link controller="city" action="show" id="${place.city.id}">${place.city.name}</g:link></li>
+				
+			</ul>
+			
+			<div id="map_canvas" style="width:400px; height:400px"></div>
+		
+		</g:if>
+		
+		<g:else>
+		
+			<h1>Place ${params.place} not found!</h1>
+		
+		</g:else>
+		
+	</body>
+
+</html>

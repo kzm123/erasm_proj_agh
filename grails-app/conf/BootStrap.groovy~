@@ -15,7 +15,8 @@ class BootStrap {
 		if(Admin.count == 0){
 			new Admin(login: 'admin', passwordHashed: 'ala123'.encodeAsPassword()).save()
 		}
-
+<<<<<<< HEAD
+        
         new Country(name: "Poland", description: "Poland description").save()
         new Country(name: "USA", description: "USA description").save()
         
@@ -36,8 +37,10 @@ class BootStrap {
             def userRole = new Authority(authority: 'ROLE_USER').save()
             UserAuthority.create(user2, userRole, true)
         }
+=======
+		new Country(name:'Poland', description:'Mój kraj taki pienkny').save();
+>>>>>>> 1833222470bf069b502f36ccf4dc9224cdff57f0
 	}
-
     def destroy = {
     }
 }
