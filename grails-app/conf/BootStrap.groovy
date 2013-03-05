@@ -3,11 +3,8 @@ import erasm_proj_agh.Authority
 import erasm_proj_agh.City
 import erasm_proj_agh.Country
 import erasm_proj_agh.User
-<<<<<<< HEAD
 import erasm_proj_agh.UserAuthority
 import erasm_proj_agh.UserDetails
-=======
->>>>>>> 1833222470bf069b502f36ccf4dc9224cdff57f0
 
 class BootStrap {
 
