@@ -112,20 +112,10 @@
 
     <g:if test="${haveQuery && !haveResults && !parseException}">
       <p>Nothing matched your query - <strong>${params.q}</strong></p>
-      <g:if test="${!searchResult?.suggestedQuery}">
-        <p>Suggestions:</p>
-        <ul>
-          <li>Try a suggested query: <g:link controller="searchable" action="index" params="[q: params.q, suggestQuery: true]">Search again with the <strong>suggestQuery</strong> option</g:link><br />
-            <em>Note: Suggestions are only available when classes are mapped with <strong>spellCheck</strong> options, either at the class or property level.<br />
-		The simplest way to do this is add <strong>spellCheck "include"</strong> to the domain class searchable mapping closure.<br />
-                See the plugin/Compass documentation Mapping sections for details.</em>
-          </li>
-        </ul>
-      </g:if>
     </g:if>
 
     <g:if test="${searchResult?.suggestedQuery}">
-      <p>Did you mean <g:link controller="searchable" action="index" params="[q: searchResult.suggestedQuery]">${StringQueryUtils.highlightTermDiffs(params.q.trim(), searchResult.suggestedQuery)}</g:link>?</p>
+      <p>Did you mean <b><i><g:link controller="searchable" action="index" params="[q: searchResult.suggestedQuery]">${searchResult.suggestedQuery}</g:link></i></b>?</p>
     </g:if>
 
     <g:if test="${parseException}">
@@ -150,12 +140,12 @@
         <g:each var="result" in="${searchResult.results}" status="index">
           <div class="result">
             <g:set var="className" value="${ClassUtils.getShortName(result.getClass())}" />
-            <g:set var="link" value="${createLink(controller: className[0].toLowerCase() + className[1..-1], action: 'show', id: result.id)}" />
-            <div class="name"><a href="${link}">${className} #${result.id}</a></div>
-            <g:set var="desc" value="${result.toString()}" />
-            <g:if test="${desc.size() > 120}"><g:set var="desc" value="${desc[0..120] + '...'}" /></g:if>
-            <div class="desc">${desc.encodeAsHTML()}</div>
-            <div class="displayLink">${link}</div>
+            <g:if test="${ClassUtils.getShortName(result.getClass()).equalsIgnoreCase("UserDetails")}">
+            	<g:set var="link" value="${createLink(controller: 'user', action: 'show', id: result.user.id)}" />
+            </g:if><g:else>
+            	<g:set var="link" value="${createLink(controller: className[0].toLowerCase() + className[1..-1], action: 'show', id: result.id)}" />
+            </g:else>
+            <div class="name"><a href="${link}">${result.toString()}</a></div>
           </div>
         </g:each>
       </div>

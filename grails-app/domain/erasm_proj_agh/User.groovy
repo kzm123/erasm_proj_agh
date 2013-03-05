@@ -65,4 +65,8 @@ class User {
         friends.contains(user)
     }
     
+    public String toString() {
+        details.name + " " + details.surname
+    }
+    
 }

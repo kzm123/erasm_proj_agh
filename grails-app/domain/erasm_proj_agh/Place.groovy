@@ -6,7 +6,12 @@ class Place {
         table 'places'
     }
     
-    static searchable = true
+    static searchable = {
+        mapping {
+            boost 2.0
+            spellCheck "include"
+        }
+    }
     
     static belongsTo = [city: City]
     

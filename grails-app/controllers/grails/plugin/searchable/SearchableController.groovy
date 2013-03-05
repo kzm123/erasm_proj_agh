@@ -15,6 +15,8 @@
  */
 package grails.plugin.searchable
 
+import javax.naming.directory.SearchResult;
+
 import org.compass.core.engine.SearchEngineQueryParseException
 
 /**
@@ -34,7 +36,11 @@ class SearchableController {
         }
         try {
             params.suggestQuery = true
-            return [searchResult: searchableService.search(params.q, params)]
+            def searchResults = searchableService.search(params.q, params)
+            searchResults.results.each {
+                it.refresh()
+            }
+            return [searchResult: searchResults]
         } catch (SearchEngineQueryParseException ex) {
             return [parseException: true]
         }

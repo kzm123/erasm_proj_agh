@@ -7,7 +7,12 @@ class Major {
         table 'majors'
     }
     
-    static searchable = true
+    static searchable = {
+        mapping {
+            boost 2.0
+            spellCheck "include"
+        }
+    }
 
     static belongsTo = [faculty: Faculty]
     

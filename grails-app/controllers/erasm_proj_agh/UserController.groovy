@@ -30,14 +30,16 @@ class UserController {
         
         def isCurrentUser = false
         def isMyFriend = false
-       
-        if (user.username == springSecurityService.principal.username) {
-            isCurrentUser = true
-            isMyFriend = false
-        } else {
-            isCurrentUser = false
-            User me = User.get(springSecurityService.principal.id)
-            isMyFriend = me.isMyFriend(user)
+        
+        if (springSecurityService.isLoggedIn()) {
+            if (user.username == springSecurityService.principal.username) {
+                isCurrentUser = true
+                isMyFriend = false
+            } else {
+                isCurrentUser = false
+                User me = User.get(springSecurityService.principal.id)
+                isMyFriend = me.isMyFriend(user)
+            }
         }
         
         render(view: 'show', model: [user: user, messages: messages, isCurrentUser: isCurrentUser, isMyFriend: isMyFriend])

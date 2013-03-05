@@ -6,7 +6,12 @@ class City {
         table 'cities'
     }
     
-    static searchable = true
+    static searchable = {
+        mapping {
+            boost 2.0
+            spellCheck "include"
+        }
+    }
     
     static belongsTo = [country: Country]
     static hasMany = [userCities: UserCity, universities: University]

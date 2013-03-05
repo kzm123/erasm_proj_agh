@@ -8,6 +8,13 @@ class Country {
     
     static hasMany = [userDetails: UserDetails]
     
+    static searchable = {
+        mapping {
+            boost 2.0
+            spellCheck "include"
+        }
+    }
+    
     String name
     String description
 

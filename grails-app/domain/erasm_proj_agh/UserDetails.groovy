@@ -4,6 +4,13 @@ class UserDetails {
     
     static belongsTo = [user: User, country: Country]
     
+    static searchable = {
+        mapping {
+            boost 2.0
+            spellCheck "include"
+        }
+    }
+    
     String name
     String surname
     boolean gender
@@ -29,6 +36,10 @@ class UserDetails {
         highSchool blank: true, nullable: true, size: 2..45, matches: /[-\.a-zA-Z0-9 ]+/
         workPlace blank: true, nullable: true, size: 2..45, matches: /[-\.a-zA-Z0-9 ]+/
         phone blank: true, nullable: true, size: 7..15, matches: /[0-9 ]+/
+    }
+    
+    public String toString() {
+        name + " " + surname
     }
     
 }

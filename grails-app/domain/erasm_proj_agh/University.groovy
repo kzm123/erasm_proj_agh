@@ -8,7 +8,12 @@ class University {
         table 'universities'
     }
     
-    static searchable = true
+    static searchable = {
+        mapping {
+            boost 2.0
+            spellCheck "include"
+        }
+    }
 
     static belongsTo = [city: City]
     static hasMany = [faculties: Faculty]

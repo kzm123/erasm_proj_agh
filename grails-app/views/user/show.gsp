@@ -29,6 +29,9 @@
 				</g:else>
 				<g:link controller="logout" class="button">Logout</g:link>
 			</sec:ifLoggedIn>
+			<sec:ifNotLoggedIn>
+				<g:link controller="login" class="button">Login</g:link>
+			</sec:ifNotLoggedIn>
 			</div>
 			
 			<h1>
