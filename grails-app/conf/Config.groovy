@@ -31,6 +31,15 @@ grails.mime.types = [
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
+grails.plugins.springsecurity.portMapper.httpPort = 8080
+grails.plugins.springsecurity.portMapper.httpsPort = 8443
+grails.plugins.springsecurity.secureChannel.definition = [
+	'/admin/**' : 'REQUIRES_SECURE_CHANNEL',
+	'/user/**' : 'REQUIRES_SECURE_CHANNEL',
+	'/*' : 'REQUIRES_SECURE_CHANNEL',
+	'/**' : 'REQUIRES_INSECURE_CHANNEL'
+]
+
 
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']

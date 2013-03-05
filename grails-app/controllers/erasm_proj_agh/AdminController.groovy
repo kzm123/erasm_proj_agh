@@ -1,6 +1,7 @@
 package erasm_proj_agh
 
 import groovy.sql.Sql
+import org.postgresql.util.PSQLException
 
 class AdminController {
 	def sessionFactory
@@ -50,7 +51,6 @@ class AdminController {
 			//Gets currentSession's database connection.
 			def sql = new Sql(sessionFactory.currentSession.connection())
 			
-			
 			//Available table list, for browsing tables. No admin here.
 			def tableList = ['countries', 'cities', 'places', 'users', 'user_details']
 			
@@ -59,7 +59,7 @@ class AdminController {
 			def colTypes
 			
 			if (params.get('table') != null){
-				System.out.println('select * from ' + params.get('table') + ' limit 0')
+//				System.out.println('select * from ' + params.get('table') + ' limit 0')
 				sql.rows('select * from ' + params.get('table') + ' limit 0') { meta ->
 					colNames = (1..meta.columnCount).collect { meta.getColumnName(it) }
 				}
@@ -68,7 +68,9 @@ class AdminController {
 			//Number of rows per page.
 			def rowsPerPage = 2
 			if(params.get('rowsPerPage') != null && params.get('rowsPerPage').isInteger()){
-				rowsPerPage = params.get('rowsPerPage')
+				rowsPerPage = Integer.parseInt(params.get('rowsPerPage'))
+				if (rowsPerPage < 1)
+					rowsPerPage = 1
 			}
 			
 			//List of selected stuff. Also number of rows pages, and list of rows shown.
@@ -80,7 +82,14 @@ class AdminController {
 						
 			//Get row list.
 			if(params.get('filled') == 't' && colNames.size() != 0){
-				rowList = sql.rows('SELECT * FROM ' + params.get('table')) {
+				try{
+					if(params.get('whereStatement').equals(''))
+						rowList = sql.rows('SELECT * FROM ' + params.get('table')) {};
+					else
+						rowList = sql.rows('SELECT * FROM ' + params.get('table') + ' WHERE ' + params.get('whereStatement')) {};
+				}catch(PSQLException ex){
+					flash.message = ex.getMessage()
+					rowList = []
 				}
 				//Caluclates how many pages for displaying all rows.
 				rowPages = Math.ceil(rowList.size / rowsPerPage )
@@ -93,21 +102,17 @@ class AdminController {
 				}
 				
 				//Get the list of shown rows.
-				def copyMax = Math.min(rowPage * rowsPerPage-1, rowList.size()-1 )
+				def copyMax = Math.min((rowPage * rowsPerPage)-1, (rowList.size() - 1))
 				def copyMin = (rowPage-1)*rowsPerPage
+//				System.out.println(copyMin.toString() + " " + copyMax.toString() + " " + ((rowPage * rowsPerPage)-1).toString() + " " + (rowList.size() - 1).toString() )
 				if(rowList.size() > 0){
-				rowShown = (copyMin..copyMax).collect {
-					rowList.get(it)
+					rowShown = (copyMin..copyMax).collect {
+						rowList.get(it)
+					}
 				}
-				System.out.println(rowShown.size + " " + copyMax)
 			}
-			}
-			//DEBUG
-//			System.out.println(rowPages)
-//			System.out.println("rowShown size: " + rowShown.size)
-			//DEBUG END
 			
-			render(view: 'query', model: [tableList: tableList, colNames : colNames, rowShown : rowShown, rowPages : rowPages, table: params.get('table')])
+			render(view: 'query', model: [tableList: tableList, colNames : colNames, rowShown : rowShown, rowPages : rowPages, rowsPerPage: rowsPerPage, table: params.get('table')])
 		} else {
 		redirect(controller:'main')
 		}
@@ -117,13 +122,15 @@ class AdminController {
 
 		if (session.admin){
 //			System.out.println("Wheeee " + params.get('table'))
-			redirect(controller:'admin', action:'query', params: [table: params.get('table')])	
+			redirect(controller:'admin', action:'query', params: [table: params.get('table'), rowsPerPage: params.get('rowsPerPage')])	
 		}
 	}
 	
 	def queryList() {
-		if (session.admin){				
-			redirect(controller:'admin', action:'query', params: [table: params.get('table'), rowPage: params.get('rowPage'), filled : 't'])
+		if (session.admin){	
+			def paramsMap = [table: params.get('table'), rowPage: params.get('rowPage'), whereStatement: params.get('whereStatement'), rowsPerPage: params.get('rowsPerPage'), filled : 't']
+//			System.out.println(params.get('whereStatement'));
+			redirect(controller:'admin', action:'query', params: paramsMap)
 		}
 		
 	}
@@ -152,7 +159,7 @@ class AdminController {
 					 
 				}
 			}
-			redirect(controller:'admin', action:'query', params: [table: params.get('table'), filled : 't', removed : 't'])
+			redirect(controller:'admin', action:'query', params: [table: params.get('table'), whereStatement: params.get('whereStatement'), rowsPerPage: params.get('rowsPerPage'), filled : 't', removed : 't'])
 		}
 	}
 	
@@ -161,6 +168,54 @@ class AdminController {
 		if(session.admin){
 			
 		}
+	}
+	
+	public queryCustom() {
+		//Gets currentSession's database connection.
+		def sql = new Sql(sessionFactory.currentSession.connection())
+		
+		//Available columns for a table. Default null.
+		def colNames
+		def rowPage = 1
+		def rowList = []
+		def rowPages
+		def rowsPerPage = 2
+		if(params.get('rowsPerPage') != null && params.get('rowsPerPage').isInteger()){
+			rowsPerPage = Integer.parseInt(params.get('rowsPerPage'))
+			if (rowsPerPage < 1)
+				rowsPerPage = 1
+		}
+		
+		def rowShown = []
+		
+		try{
+			if(params.get('query')){
+				rowList = sql.rows(params.get('query')) { meta ->
+					colNames = (1..meta.columnCount).collect { meta.getColumnName(it) }
+				}
+			}
+		}catch(PSQLException ex){
+		   flash.message = ex.getMessage()
+		}
+		
+		rowPages = Math.ceil(rowList.size / rowsPerPage )
+		
+		if(params.get('rowPage') != null && params.get('rowPage').isInteger() ){
+			rowPage = Integer.parseInt(params.get('rowPage'))
+			//System.out.println('rowPage')
+		}
+		
+		//Get the list of shown rows.
+		def copyMax = Math.min((rowPage * rowsPerPage)-1, (rowList.size() - 1))
+		def copyMin = (rowPage-1)*rowsPerPage
+//		System.out.println(copyMin.toString() + " " + copyMax.toString() + " " + ((rowPage * rowsPerPage)-1).toString() + " " + (rowList.size() - 1).toString() )
+		if(rowList.size() > 0){
+			rowShown = (copyMin..copyMax).collect {
+				rowList.get(it)
+			}
+		}
+		
+		render(view: 'queryCustom', model: [colNames : colNames, rowShown : rowShown, rowPages : rowPages, rowsPerPage: rowsPerPage, query: params.get('query')])
 	}
 def index = {}
 

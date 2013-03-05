@@ -6,6 +6,9 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
+grails.tomcat.keystorePath = "keystore"
+grails.tomcat.keystorePassword = "ErasmProj"
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -52,5 +55,6 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.1"
 
         compile ':cache:1.0.0'
+		compile ":spring-security-core:1.2.7.3"
     }
 }
