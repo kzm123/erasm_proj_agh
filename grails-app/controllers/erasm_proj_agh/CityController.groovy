@@ -17,8 +17,11 @@ class CityController {
             def places = Place.findAllWhere(city: city)
             def universities = University.findAllWhere(city: city)
             
-            def user = User.get(springSecurityService.principal.id)
-            def userSignedIn = UserCity.isLinked(user, city)
+            def userSignedIn = false
+            if (springSecurityService.isLoggedIn()) {
+                def user = User.get(springSecurityService.principal.id)
+                userSignedIn = UserCity.isLinked(user, city)
+            }
             
             render(view: 'show', model: [city: city, places: places, universities: universities, userSignedIn: userSignedIn])
         } else {

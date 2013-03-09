@@ -5,6 +5,10 @@ import erasm_proj_agh.Place;
 class PlaceController {
     
     def index() {
+        redirect(action: 'show')
+    }
+    
+    def show() {
         if (params.id) {
             def place = Place.get(params.id)
             render(view: 'show', model: [place: place])

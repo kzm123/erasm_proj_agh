@@ -33,4 +33,9 @@ class Place {
 	public addComment(Comment comment){
 		comments.add(comment);
 	}
+    
+    public String toString() {
+        name
+    }
+    
 }

@@ -51,7 +51,7 @@
 			
 			<ul class="info">
 				
-				<li>City: <g:link controller="city" action="index" params="[city: place.city.name]">${place.city.name}</g:link></li>
+				<li>City: <g:link controller="city" action="show" id="${place.city.id}">${place.city.name}</g:link></li>
 
 				<div id="map_canvas" style="width:400px; height:400px"></div>
 				

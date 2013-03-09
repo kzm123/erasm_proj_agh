@@ -115,7 +115,7 @@
 				
 		<p class="info">
 			Don't have an account?
-			<g:link controller="user" action="register">Sign up now!</g:link>
+			<g:link controller="user" action="register"><g:message code="text.login.signup" /></g:link>
 		</p>
 		
 	</form>

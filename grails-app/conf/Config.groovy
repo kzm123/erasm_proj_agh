@@ -36,6 +36,9 @@ grails.plugins.springsecurity.portMapper.httpsPort = 8443
 grails.plugins.springsecurity.secureChannel.definition = [
 	'/admin/**' : 'REQUIRES_SECURE_CHANNEL',
 	'/user/**' : 'REQUIRES_SECURE_CHANNEL',
+    '/login/**' : 'REQUIRES_SECURE_CHANNEL',
+    '/logout/**' : 'REQUIRES_SECURE_CHANNEL',
+    '/city/**': 'REQUIRES_SECURE_CHANNEL',
 	'/*' : 'REQUIRES_SECURE_CHANNEL',
 	'/**' : 'REQUIRES_INSECURE_CHANNEL'
 ]

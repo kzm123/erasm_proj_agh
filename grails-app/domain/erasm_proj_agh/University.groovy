@@ -26,4 +26,8 @@ class University {
         description blank: true, nullable: true, size: 0..1000
     }
     
+    public String toString() {
+        name
+    }
+    
 }

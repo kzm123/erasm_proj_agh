@@ -23,8 +23,8 @@ class Country {
         description blank: true, nullable: true
     }
     
-    String toString() {
-        return this.name
+    public String toString() {
+        name
     }
     
 }

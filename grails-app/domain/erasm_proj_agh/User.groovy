@@ -51,6 +51,7 @@ class User {
 
     protected void encodePassword() {
         password = springSecurityService.encodePassword(password)
+        println password
     }
     
     public addFriend(user) {

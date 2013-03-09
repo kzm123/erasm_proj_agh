@@ -25,4 +25,9 @@ class City {
         name blank: false, nullable: false, size: 2..58, matches: /[-\.a-zA-Z0-9 ]+/
         description blank: true, nullable: true, size: 0..1000
     }
+    
+    public String toString() {
+        name
+    }
+    
 }
