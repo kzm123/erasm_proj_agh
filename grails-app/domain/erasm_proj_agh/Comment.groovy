@@ -41,4 +41,5 @@ class Comment implements Comparable {
 	@Override
 	public int compareTo(Object arg0) {
 		return date <=> arg0?.date 
-	}}
+	}
+}

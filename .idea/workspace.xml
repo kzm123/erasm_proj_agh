@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59782d67-1c1c-400a-9f09-4f88953be1be" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-app/images/apple-touch-icon-retina.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-app/images/apple-touch-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-app/images/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-app/images/grails_logo.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-app/images/leftnav_btm.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-app/images/leftnav_midstretch.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-app/images/leftnav_top.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-app/images/springsource.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/images/logo.png" afterPath="$PROJECT_DIR$/web-app/images/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/erasm_proj_agh/User.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/erasm_proj_agh/User.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" afterPath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/stacktrace.log" afterPath="$PROJECT_DIR$/target/stacktrace.log" />
+    <list default="true" id="59782d67-1c1c-400a-9f09-4f88953be1be" name="Default" comment="Dodane czcionki i poprawki w css.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/fonts/bebasneue-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/fonts/bebasneue-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/fonts/bebasneue-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/fonts/bebasneue-webfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/erasm_proj_agh/Comment.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/erasm_proj_agh/Comment.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/bootstrap.css" afterPath="$PROJECT_DIR$/web-app/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/style.css" afterPath="$PROJECT_DIR$/web-app/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="erasm_proj_agh.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME$/.grails/" />
-    <file path="/Dummy.txt" changelist="59782d67-1c1c-400a-9f09-4f88953be1be" time="1363955143466" ignored="false" />
+    <file path="/Dummy.txt" changelist="59782d67-1c1c-400a-9f09-4f88953be1be" time="1363967000764" ignored="false" />
     <file path="/UserController.groovy" changelist="59782d67-1c1c-400a-9f09-4f88953be1be" time="1363715753649" ignored="false" />
     <file path="/SearchableController.groovy" changelist="59782d67-1c1c-400a-9f09-4f88953be1be" time="1363794735419" ignored="false" />
     <file path="/main.gsp" changelist="59782d67-1c1c-400a-9f09-4f88953be1be" time="1363805197945" ignored="false" />
-    <file path="/style.css" changelist="59782d67-1c1c-400a-9f09-4f88953be1be" time="1363803587018" ignored="false" />
+    <file path="/style.css" changelist="59782d67-1c1c-400a-9f09-4f88953be1be" time="1363966934229" ignored="false" />
+    <file path="/bootstrap.css" changelist="59782d67-1c1c-400a-9f09-4f88953be1be" time="1363966782467" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,10 +107,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Comment.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Comment.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/domain/erasm_proj_agh/Comment.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="6" selection-start="30" selection-end="30" vertical-scroll-proportion="-0.040462427">
+            <state line="44" column="26" selection-start="957" selection-end="957" vertical-scroll-proportion="-8.25">
               <folding />
             </state>
           </provider>
@@ -122,10 +119,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="bootstrap.min.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/css/bootstrap.min.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/css/bootstrap.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2212" column="17" selection-start="39865" selection-end="39865" vertical-scroll-proportion="1.1290323">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web-app/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="199" column="17" selection-start="3275" selection-end="3275" vertical-scroll-proportion="0.0">
+            <state line="269" column="29" selection-start="5101" selection-end="5101" vertical-scroll-proportion="0.37634408">
               <folding />
             </state>
           </provider>
@@ -169,8 +184,10 @@
       <list>
         <option value="$PROJECT_DIR$/grails-app/controllers/erasm_proj_agh/UserController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/grails/plugin/searchable/SearchableController.groovy" />
-        <option value="$PROJECT_DIR$/web-app/css/style.css" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/domain/erasm_proj_agh/Comment.groovy" />
+        <option value="$PROJECT_DIR$/web-app/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/web-app/css/style.css" />
       </list>
     </option>
   </component>
@@ -236,6 +253,74 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erasm_proj_agh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erasm_proj_agh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fonts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erasm_proj_agh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erasm_proj_agh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erasm_proj_agh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erasm_proj_agh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erasm_proj_agh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erasm_proj_agh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="grails-app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -283,6 +368,11 @@
     <property name="dynamic.classpath" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web-app/fonts" />
+    </key>
   </component>
   <component name="RunManager" selected="Grails.Grails:erasm_proj_agh">
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
@@ -504,7 +594,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodane czcionki i poprawki w css." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -517,25 +607,12 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Dodane czcionki i poprawki w css." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/erasm_proj_agh/UniversityController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="26" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/erasm_proj_agh/UserController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="8" selection-start="6025" selection-end="6025" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/grails/plugin/searchable/SearchableController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="31" selection-start="1402" selection-end="1402" vertical-scroll-proportion="0.0">
@@ -600,13 +677,6 @@
         <state line="2" column="6" selection-start="49" selection-end="49" vertical-scroll-proportion="0.06329114" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="17" selection-start="3275" selection-end="3275" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/grails/plugin/searchable/SearchableController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="32" selection-start="1252" selection-end="1252" vertical-scroll-proportion="0.0">
@@ -625,12 +695,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/erasm_proj_agh/Comment.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="6" selection-start="30" selection-end="30" vertical-scroll-proportion="-0.040462427">
+        <state line="44" column="26" selection-start="957" selection-end="957" vertical-scroll-proportion="-8.25">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2212" column="17" selection-start="39865" selection-end="39865" vertical-scroll-proportion="1.1290323">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="269" column="29" selection-start="5101" selection-end="5101" vertical-scroll-proportion="0.37634408">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
