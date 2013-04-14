@@ -6,13 +6,48 @@
 <head>
     <title>Erasm Experience - Registration</title>
     <meta name="layout" content="main" />
+
+
+    <script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#registrationform :input").keydown(function() {
+                $('#registrationform').validate().form();
+                alert('qwe');
+            });
+            $("#registrationform").validate({
+                rules: {
+                    username: {
+                        required: true,
+                        minlength: 5,
+                        maxlength: 30,
+                        usernamevalidator: true
+                    }
+                },
+                messages: {
+                    username: {
+                        required: "Enter username",
+                        minlength: $.format("At least {0} characters required!"),
+                        maxlength: $.format("Maximum {0} characters allowed!")
+                    }
+                }
+            });
+            $.validator.addMethod("usernamevalidator",
+                    function(value, element) {
+                        return /^[-_a-zA-Z0-9]+$/.test(value);
+                    },
+                    "Sorry, no special characters allowed"
+            );
+        });
+    </script>
 </head>
 
 <body>
     
 	<h1>Registration</h1>
     
-    <g:form class="form" url="[controller: 'user', action: 'register']">
+    <g:form id="registrationform" class="form" url="[controller: 'user', action: 'register']">
         
         <g:hasErrors bean="${user}">
             <div class="errors">
@@ -23,7 +58,8 @@
         <p>
             <label for="username">Username</label>
             <g:textField name="username" value="${user?.username}" 
-                class="${hasErrors(bean: user, field: 'username', 'errors')}"/>
+                class="${hasErrors(bean: user, field: 'username', 'errors')}"
+                 minlength="5"/>
         </p>
         
         <p>

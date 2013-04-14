@@ -29,7 +29,7 @@ h2{
 }	
 .hubofeebg-inner{
 	min-height: 230px;
-	background: url(../img/pattern.png);	
+	background: url(../images/pattern.png);
 }
 .profile{
 	
@@ -196,18 +196,12 @@ transition-duration: 1s;
 }
 
 .search {
-    display: block;
-    float: right;
-	margin-top: 0;
-	margin-right: -200px;
-}
-
-.search input[type=text] {
-    margin-top: 5px;
+	margin-top: 5px;
+	margin-right: 5px;
 }
 
 .search input[type=image] {
-    margin-top: -7px;
+    margin-top: -10px;
 }
 
 .news{
@@ -283,7 +277,6 @@ hr.soften {
   overflow: hidden;
 }
 #collaboration .container{
-		
 }
 
 .item{
@@ -385,7 +378,7 @@ opacity: 0.4;
 }
 
 .navbar-inner{
-	border-bottom: 1px solid #ddd;	
+	border-bottom: 1px solid #ddd;
 	height: 40px;
 }
 #collaboration{
